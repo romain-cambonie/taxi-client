@@ -22,100 +22,100 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-#  prettier:
-#    name: Prettier
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Checkout repository
-#        uses: actions/checkout@v3
-#
-#      - name: Set up Node.js
-#        uses: actions/setup-node@v3
-#        with:
-#          node-version: 'lts/*'
-#          cache: 'yarn'
-#
-#      - name: Install dependencies
-#        run: yarn
-#
-#      - name: Prettier
-#        run: yarn prettier --check .
+  prettier:
+    name: Prettier
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-#  eslint:
-#    name: ESLint
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Checkout repository
-#        uses: actions/checkout@v3
-#
-#      - name: Set up Node.js
-#        uses: actions/setup-node@v3
-#        with:
-#          node-version: 'lts/*'
-#          cache: 'yarn'
-#
-#      - name: Install dependencies
-#        run: yarn
-#
-#      - name: TypeScript Lint
-#        run: yarn lint
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 'lts/*'
+          cache: 'yarn'
 
-#  stylelint:
-#    name: Stylelint
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Checkout repository
-#        uses: actions/checkout@v3n
-#
-#      - name: Set up Node.js
-#        uses: actions/setup-node@v3
-#        with:
-#          node-version: 'lts/*'
-#          cache: 'yarn'
-#
-#      - name: Install dependencies
-#        run: yarn
-#
-#      - name: Style Lint
-#        run: yarn stylelint "./**/*.scss"
+      - name: Install dependencies
+        run: yarn
 
-#  commitlint:
-#    name: CommitLint
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Checkout repository
-#        uses: actions/checkout@v3
-#
-#      - name: Set up Node.js
-#        uses: actions/setup-node@v3
-#        with:
-#          node-version: 'lts/*'
-#          cache: 'yarn'
-#
-#      - name: Install dependencies
-#        run: yarn
-#
-#      - name: Commit Lint
-#        run: yarn commitlint --from origin/main
+      - name: Prettier
+        run: yarn prettier --check .
 
-#  test:
-#    name: Test
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Checkout repository
-#        uses: actions/checkout@v3
-#
-#      - name: Set up Node.js
-#        uses: actions/setup-node@v3
-#        with:
-#          node-version: 'lts/*'
-#          cache: 'yarn'
-#
-#      - name: Install dependencies
-#        run: yarn
-#
-#      - name: Test
-#        run: yarn test
+  #  eslint:
+  #    name: ESLint
+  #    runs-on: ubuntu-latest
+  #    steps:
+  #      - name: Checkout repository
+  #        uses: actions/checkout@v3
+  #
+  #      - name: Set up Node.js
+  #        uses: actions/setup-node@v3
+  #        with:
+  #          node-version: 'lts/*'
+  #          cache: 'yarn'
+  #
+  #      - name: Install dependencies
+  #        run: yarn
+  #
+  #      - name: TypeScript Lint
+  #        run: yarn lint
+
+  #  stylelint:
+  #    name: Stylelint
+  #    runs-on: ubuntu-latest
+  #    steps:
+  #      - name: Checkout repository
+  #        uses: actions/checkout@v3n
+  #
+  #      - name: Set up Node.js
+  #        uses: actions/setup-node@v3
+  #        with:
+  #          node-version: 'lts/*'
+  #          cache: 'yarn'
+  #
+  #      - name: Install dependencies
+  #        run: yarn
+  #
+  #      - name: Style Lint
+  #        run: yarn stylelint "./**/*.scss"
+
+  #  commitlint:
+  #    name: CommitLint
+  #    runs-on: ubuntu-latest
+  #    steps:
+  #      - name: Checkout repository
+  #        uses: actions/checkout@v3
+  #
+  #      - name: Set up Node.js
+  #        uses: actions/setup-node@v3
+  #        with:
+  #          node-version: 'lts/*'
+  #          cache: 'yarn'
+  #
+  #      - name: Install dependencies
+  #        run: yarn
+  #
+  #      - name: Commit Lint
+  #        run: yarn commitlint --from origin/main
+
+  #  test:
+  #    name: Test
+  #    runs-on: ubuntu-latest
+  #    steps:
+  #      - name: Checkout repository
+  #        uses: actions/checkout@v3
+  #
+  #      - name: Set up Node.js
+  #        uses: actions/setup-node@v3
+  #        with:
+  #          node-version: 'lts/*'
+  #          cache: 'yarn'
+  #
+  #      - name: Install dependencies
+  #        run: yarn
+  #
+  #      - name: Test
+  #        run: yarn test
 
   build:
     name: Build Client Application
@@ -141,7 +141,6 @@ jobs:
         with:
           name: build
           path: dist
-
 #  create-feature-branch-workspace:
 #    name: Create feature branch workspace
 #    uses: codingones/github-actions-workflows/.github/workflows/create-terraform-cloud-workspace-for-aws-ephemeral-environment.terraform.yml@main
