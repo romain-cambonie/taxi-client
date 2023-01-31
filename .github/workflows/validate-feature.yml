@@ -41,24 +41,24 @@ jobs:
       - name: Prettier
         run: yarn prettier --check .
 
-  #  eslint:
-  #    name: ESLint
-  #    runs-on: ubuntu-latest
-  #    steps:
-  #      - name: Checkout repository
-  #        uses: actions/checkout@v3
-  #
-  #      - name: Set up Node.js
-  #        uses: actions/setup-node@v3
-  #        with:
-  #          node-version: 'lts/*'
-  #          cache: 'yarn'
-  #
-  #      - name: Install dependencies
-  #        run: yarn
-  #
-  #      - name: TypeScript Lint
-  #        run: yarn lint
+  eslint:
+    name: ESLint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 'lts/*'
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Run ESLint
+        run: yarn eslint
 
   #  stylelint:
   #    name: Stylelint
