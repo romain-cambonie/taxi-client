@@ -15,7 +15,6 @@ on:
       - 'style/*'
       - 'test/*'
   workflow_dispatch:
-
 #jobs:
 #  feature-branch-workspace:
 #    name: Get Terraform Workspace form Terraform apply outputs
