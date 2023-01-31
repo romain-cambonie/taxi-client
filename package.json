@@ -9,6 +9,7 @@
     "test": "ng test",
     "lint.es": "ng lint",
     "lint.style": "stylelint ./**/*.scss",
+    "lint.commit": "commitlint --from origin/main",
     "prettier-fix": "prettier --write --ignore-unknown ."
   },
   "private": true,
@@ -34,6 +35,8 @@
     "@angular-eslint/template-parser": "15.2.0",
     "@angular/cli": "~15.1.3",
     "@angular/compiler-cli": "^15.1.0",
+    "@commitlint/cli": "^17.4.2",
+    "@commitlint/config-conventional": "^17.4.2",
     "@types/jasmine": "~4.3.0",
     "@typescript-eslint/eslint-plugin": "5.50.0",
     "@typescript-eslint/parser": "5.50.0",
