@@ -203,9 +203,9 @@ jobs:
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_S3_BUCKET: taxi-aymeric-client-${{ needs.create-feature-branch-workspace.outputs.tf-workspace }}
+          AWS_S3_BUCKET: taxi-aymeric-client-${{ needs.create-feature-branch-workspace.outputs.tf-workspace }}-bucket
           SOURCE_DIR: 'taxi'
 
       - name: See Taxi Aymeric client URL
         run: |
-          echo http://taxi-aymeric-client-${{ needs.create-feature-branch-workspace.outputs.tf-workspace }}.s3-website.eu-west-3.amazonaws.com
+          echo http://taxi-aymeric-client-${{ needs.create-feature-branch-workspace.outputs.tf-workspace }}-bucket.s3-website.us-east-1.amazonaws.com
