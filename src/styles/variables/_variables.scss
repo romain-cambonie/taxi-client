@@ -1,3 +1,14 @@
+$gray-500: #adb5bd;
+$gray-600: #6c757d;
+$primary: #065ad8;
+$secondary: $gray-600;
+$text-muted: $gray-500;
+$input-bg: #fafcfe;
+$input-group-addon-bg: $input-bg;
+$input-group-addon-color: $secondary;
+
 @import 'bootstrap/scss/variables';
 @import 'bootstrap/scss/variables-dark';
 @import 'bootstrap/scss/maps';
+
+@import 'icons';

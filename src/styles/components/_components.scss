@@ -1,5 +1,14 @@
 @import 'bootstrap/scss/root';
 @import 'bootstrap/scss/reboot';
-@import 'bootstrap/scss/type';
-@import 'bootstrap/scss/containers';
 @import 'bootstrap/scss/utilities/api';
+@import 'bootstrap/scss/type';
+@import 'bootstrap/scss/helpers';
+@import 'bootstrap/scss/containers';
+@import 'bootstrap/scss/grid';
+@import 'bootstrap/scss/buttons';
+@import 'bootstrap/scss/forms';
+
+@import 'backgrounds';
+@import 'icons';
+@import 'images';
+@import 'input-group';

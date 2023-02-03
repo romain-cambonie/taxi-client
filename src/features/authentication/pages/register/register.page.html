@@ -1,0 +1,51 @@
+<div class="px-5 w-100">
+  <h1 class="text-primary mb-4">Créez votre compte</h1>
+  <p class="text-secondary mb-5">
+    Bienvenue chez Taxi gestion 👋
+    <br />
+    Vous pourrez commencer à utiliser l'application après avoir créé votre compte.
+  </p>
+  <form class="mb-4">
+    <label for="name" class="form-label">Nom</label>
+    <div class="input-group mb-3">
+      <i class="input-group-text ri ri-user-3-line" aria-hidden="true"></i>
+      <input id="name" type="email" class="form-control form-control-lg border-start-0" />
+    </div>
+    <label for="username" class="form-label">Adresse électronique ou numéro de téléphone portable</label>
+    <div class="input-group mb-3">
+      <i class="input-group-text ri ri-mail-line" aria-hidden="true"></i>
+      <input id="username" type="email" class="form-control form-control-lg border-start-0" />
+    </div>
+    <label for="password" class="form-label">Mot de passe</label>
+    <div class="input-group mb-3">
+      <i class="input-group-text ri ri-lock-line" aria-hidden="true"></i>
+      <input
+        id="password"
+        class="form-control form-control-lg border-start-0 border-end-0"
+        appPasswordDisplay
+        #password="passwordDisplay"
+        [type]="password.isDisplayed ? 'text' : 'password'" />
+      <button
+        class="btn border border-start-0"
+        type="button"
+        [class.active]="password.isDisplayed"
+        (click)="password.toggleDisplay()">
+        <i
+          class="ri ri-lg align-middle"
+          [ngClass]="password.isDisplayed ? 'ri-eye-off-line text-primary' : 'ri-eye-line text-muted'"
+          aria-hidden="true"></i>
+        <span class="visually-hidden">Afficher le mot de passe</span>
+      </button>
+    </div>
+    <div class="mb-3 form-check">
+      <input type="checkbox" class="form-check-input" id="cgu" />
+      <label class="form-check-label" for="cgu">J'accepte les</label>
+      <a class="text-decoration-none ms-1" routerLink="cgu" target="_blank" rel="noopener">conditions d'utilisation</a>
+    </div>
+    <button type="submit" class="btn btn-primary mt-5 p-3 w-100">Créer mon compte</button>
+  </form>
+  <p class="mt-5 text-center">
+    Vous avez déjà un compte&nbsp;?
+    <a class="text-decoration-none ms-1" routerLink="/login">Connectez-vous</a>
+  </p>
+</div>

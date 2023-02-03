@@ -38,7 +38,8 @@
           {
             "suffixes": ["Component", "Layout", "Page"]
           }
-        ]
+        ],
+        "@typescript-eslint/no-inferrable-types": "off"
       }
     },
     {
