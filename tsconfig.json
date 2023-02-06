@@ -6,6 +6,9 @@
   "exclude": ["src/**/*.spec.ts", "src/**/*.test.ts"],
   "compileOnSave": false,
   "compilerOptions": {
+    "paths": {
+      "@features/*": ["src/features/*"]
+    },
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,

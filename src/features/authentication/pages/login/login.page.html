@@ -1,0 +1,42 @@
+<div class="px-lg-5 px-2 w-100">
+  <h1 class="text-primary mb-4">Connexion</h1>
+  <p class="text-secondary mb-5">
+    Ravis de vous revoir 👋
+    <br />
+    Vous pourrez continuer là où vous en étiez après vous être connecté.
+  </p>
+  <form class="mb-4">
+    <label for="username" class="form-label">Adresse électronique ou numéro de téléphone portable</label>
+    <div class="input-group mb-3">
+      <i class="input-group-text ri ri-mail-line" aria-hidden="true"></i>
+      <input id="username" type="email" class="form-control form-control-lg border-start-0" />
+    </div>
+    <label for="password" class="form-label">Mot de passe</label>
+    <div class="input-group mb-3">
+      <i class="input-group-text ri ri-lock-line" aria-hidden="true"></i>
+      <input
+        id="password"
+        class="form-control form-control-lg border-start-0 border-end-0"
+        appPasswordDisplay
+        #password="passwordDisplay"
+        [type]="password.isDisplayed ? 'text' : 'password'" />
+      <button
+        class="btn border border-start-0"
+        type="button"
+        [class.active]="password.isDisplayed"
+        (click)="password.toggleDisplay()">
+        <i
+          class="ri ri-lg align-middle"
+          [ngClass]="password.isDisplayed ? 'ri-eye-off-line text-primary' : 'ri-eye-line text-muted'"
+          aria-hidden="true"></i>
+        <span class="visually-hidden">Afficher le mot de passe</span>
+      </button>
+    </div>
+    <div class="text-end"><a class="text-decoration-none" routerLink="/forgot-password">Mot de passe oublié ?</a></div>
+    <button type="submit" class="btn btn-primary mt-5 p-3 w-100">Se connecter</button>
+  </form>
+  <p class="mt-5 text-center">
+    Pas encore de compte&nbsp;?
+    <a class="text-decoration-none ms-1" routerLink="/register">Créez le dès à présent&nbsp;!</a>
+  </p>
+</div>
