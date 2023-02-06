@@ -5,16 +5,16 @@
     <br />
     Vous pourrez commencer à utiliser l'application après avoir créé votre compte.
   </p>
-  <form class="mb-4">
+  <form class="mb-4" [formGroup]="registerForm" (ngSubmit)="register()">
     <label for="name" class="form-label">Nom</label>
     <div class="input-group mb-3">
       <i class="input-group-text ri ri-user-3-line" aria-hidden="true"></i>
-      <input id="name" type="email" class="form-control form-control-lg border-start-0" />
+      <input id="name" type="text" class="form-control form-control-lg border-start-0" formControlName="name" />
     </div>
     <label for="username" class="form-label">Adresse électronique ou numéro de téléphone portable</label>
     <div class="input-group mb-3">
       <i class="input-group-text ri ri-mail-line" aria-hidden="true"></i>
-      <input id="username" type="email" class="form-control form-control-lg border-start-0" />
+      <input id="username" type="text" class="form-control form-control-lg border-start-0" formControlName="username" />
     </div>
     <label for="password" class="form-label">Mot de passe</label>
     <div class="input-group mb-3">
@@ -22,6 +22,7 @@
       <input
         id="password"
         class="form-control form-control-lg border-start-0 border-end-0"
+        formControlName="password"
         appPasswordDisplay
         #password="passwordDisplay"
         [type]="password.isDisplayed ? 'text' : 'password'" />

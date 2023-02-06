@@ -5,11 +5,11 @@
     <br />
     Vous pourrez continuer là où vous en étiez après vous être connecté.
   </p>
-  <form class="mb-4">
+  <form class="mb-4" [formGroup]="loginForm" (ngSubmit)="login()">
     <label for="username" class="form-label">Adresse électronique ou numéro de téléphone portable</label>
     <div class="input-group mb-3">
       <i class="input-group-text ri ri-mail-line" aria-hidden="true"></i>
-      <input id="username" type="email" class="form-control form-control-lg border-start-0" />
+      <input id="username" type="text" class="form-control form-control-lg border-start-0" formControlName="username" />
     </div>
     <label for="password" class="form-label">Mot de passe</label>
     <div class="input-group mb-3">
@@ -19,7 +19,8 @@
         class="form-control form-control-lg border-start-0 border-end-0"
         appPasswordDisplay
         #password="passwordDisplay"
-        [type]="password.isDisplayed ? 'text' : 'password'" />
+        [type]="password.isDisplayed ? 'text' : 'password'"
+        formControlName="password" />
       <button
         class="btn border border-start-0"
         type="button"
