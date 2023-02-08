@@ -1,11 +1,12 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
-import { usernameValidator } from '../../validators';
+import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { passwordValidator, usernameValidator } from '../../validators';
+import { toPasswordErrorMessages, toUsernameErrorMessage } from './error-messages';
 
 type RegisterForm = {
-  name: string;
   username: string;
   password: string;
+  cgu: boolean;
 };
 
 @Component({
@@ -14,12 +15,23 @@ type RegisterForm = {
 })
 export class RegisterPage {
   public registerForm = new FormGroup<Record<keyof RegisterForm, AbstractControl>>({
-    name: new FormControl<RegisterForm['name']>('', [Validators.required]),
     username: new FormControl<RegisterForm['username']>('', [Validators.required, usernameValidator]),
-    password: new FormControl<RegisterForm['password']>('', [Validators.required, Validators.minLength(6)])
+    password: new FormControl<RegisterForm['password']>('', [Validators.required, Validators.minLength(8), passwordValidator]),
+    cgu: new FormControl<RegisterForm['cgu']>(false, [Validators.requiredTrue])
   });
 
-  public register = (): void => {
+  public onRegister = (): void => {
+    if (this.registerForm.invalid) {
+      this.registerForm.markAllAsTouched();
+      return;
+    }
+
     console.log(this.registerForm);
   };
+
+  public toUsernameErrorMessage = (usernameErrors?: ValidationErrors | null): string =>
+    usernameErrors == null ? '' : toUsernameErrorMessage(usernameErrors);
+
+  public toPasswordErrorMessage = (passwordErrors?: ValidationErrors | null): string[] =>
+    passwordErrors == null ? [] : toPasswordErrorMessages(passwordErrors);
 }

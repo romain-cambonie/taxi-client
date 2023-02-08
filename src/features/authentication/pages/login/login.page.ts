@@ -16,7 +16,7 @@ export class LoginPage {
     password: new FormControl<LoginForm['password']>('', [Validators.required])
   });
 
-  public login = (): void => {
+  public onLogin = (): void => {
     console.log(this.loginForm);
   };
 }

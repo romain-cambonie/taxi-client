@@ -14,7 +14,7 @@ export class ForgotPasswordPage {
     username: new FormControl<ForgotPasswordForm['username']>('', [Validators.required])
   });
 
-  public forgotPassword = (): void => {
+  public onForgotPassword = (): void => {
     console.log(this.forgotPasswordForm);
   };
 }
