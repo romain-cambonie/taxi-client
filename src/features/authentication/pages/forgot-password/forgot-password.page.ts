@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { toUsernameErrorMessage } from '../../presentation';
 
 type ForgotPasswordForm = {
   username: string;
@@ -15,6 +16,14 @@ export class ForgotPasswordPage {
   });
 
   public onForgotPassword = (): void => {
+    if (this.forgotPasswordForm.invalid) {
+      this.forgotPasswordForm.markAllAsTouched();
+      return;
+    }
+
     console.log(this.forgotPasswordForm);
   };
+
+  public toUsernameErrorMessage = (usernameErrors?: ValidationErrors | null): string =>
+    usernameErrors == null ? '' : toUsernameErrorMessage(usernameErrors);
 }

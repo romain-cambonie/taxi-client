@@ -7,20 +7,25 @@
   </p>
   <form class="mb-4" [formGroup]="loginForm" (ngSubmit)="onLogin()">
     <label for="username" class="form-label">Adresse électronique ou numéro de téléphone portable</label>
-    <div class="input-group mb-3">
+    <div
+      class="input-group mb-3 has-validation"
+      [class.is-invalid]="loginForm.get('username')?.touched && loginForm.get('username')?.invalid">
       <i class="input-group-text ri ri-mail-line" aria-hidden="true"></i>
       <input id="username" type="text" class="form-control form-control-lg border-start-0" formControlName="username" />
+      <div class="invalid-feedback">{{ toUsernameErrorMessage(loginForm.get('username')?.errors) }}</div>
     </div>
     <label for="password" class="form-label">Mot de passe</label>
-    <div class="input-group mb-3">
+    <div
+      class="input-group has-validation"
+      [class.is-invalid]="loginForm.get('password')?.touched && loginForm.get('password')?.invalid">
       <i class="input-group-text ri ri-lock-line" aria-hidden="true"></i>
       <input
         id="password"
-        class="form-control form-control-lg border-start-0 border-end-0"
+        class="form-control form-control-lg border-start-0 border-end-0 rounded-0"
+        formControlName="password"
         appPasswordDisplay
         #password="passwordDisplay"
-        [type]="password.isDisplayed ? 'text' : 'password'"
-        formControlName="password" />
+        [type]="password.isDisplayed ? 'text' : 'password'" />
       <button
         class="btn border border-start-0"
         type="button"
@@ -32,8 +37,11 @@
           aria-hidden="true"></i>
         <span class="visually-hidden">Afficher le mot de passe</span>
       </button>
+      <div class="invalid-feedback" *ngIf="toPasswordErrorMessage(loginForm.get('password')?.errors) as passwordErrorMessages">
+        {{ passwordErrorMessages[0] }}
+      </div>
     </div>
-    <div class="text-end"><a class="text-decoration-none" routerLink="/forgot-password">Mot de passe oublié ?</a></div>
+    <div class="text-end mt-1"><a class="text-decoration-none" routerLink="/forgot-password">Mot de passe oublié ?</a></div>
     <button type="submit" class="btn btn-primary mt-5 p-3 w-100">Se connecter</button>
   </form>
   <p class="mt-5 text-center">

@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { passwordValidator, usernameValidator } from '../../validators';
-import { toPasswordErrorMessages, toUsernameErrorMessage } from './error-messages';
+import { toPasswordErrorMessages, toUsernameErrorMessage } from '../../presentation';
 
 type RegisterForm = {
   username: string;
