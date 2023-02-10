@@ -63,7 +63,13 @@
       <a class="text-decoration-none ms-1" routerLink="cgu" target="_blank" rel="noopener">conditions d'utilisation</a>
       <div class="invalid-feedback">Vous devez accepter les conditions d'utilisation</div>
     </div>
-    <button type="submit" class="btn btn-primary mt-5 p-3 w-100">Créer mon compte</button>
+    <button type="submit" class="btn btn-primary mt-5 p-3 w-100" [disabled]="isLoading$ | async">
+      <ng-container *ngIf="isLoading$ | async; else createAccountText">
+        <span class="spinner-grow spinner-grow-sm me-2" role="status" aria-hidden="true"></span>
+        Création en cours...
+      </ng-container>
+      <ng-template #createAccountText>Créer mon compte</ng-template>
+    </button>
   </form>
   <p class="mt-5 text-center">
     Vous avez déjà un compte&nbsp;?
