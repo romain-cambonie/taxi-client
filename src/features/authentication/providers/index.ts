@@ -1,1 +1,2 @@
-export * from './setRegisterFactory';
+export * from './factories';
+export * from './values';
