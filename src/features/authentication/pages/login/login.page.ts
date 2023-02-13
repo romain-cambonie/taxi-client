@@ -22,8 +22,6 @@ export class LoginPage {
       this.loginForm.markAllAsTouched();
       return;
     }
-
-    console.log(this.loginForm);
   };
 
   public toUsernameErrorMessage = (usernameErrors?: ValidationErrors | null): string =>

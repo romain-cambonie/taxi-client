@@ -6,70 +6,24 @@
     Vous pourrez commencer à utiliser l'application après avoir créé votre compte.
   </p>
   <form class="mb-4" [formGroup]="registerForm" (ngSubmit)="onRegister()">
-    <label for="username" class="form-label">Adresse électronique ou numéro de téléphone portable</label>
-    <div
-      class="input-group mb-3 has-validation"
-      [class.is-invalid]="registerForm.get('username')?.touched && registerForm.get('username')?.invalid">
-      <i class="input-group-text ri ri-mail-line" aria-hidden="true"></i>
-      <input id="username" type="text" class="form-control form-control-lg border-start-0" formControlName="username" />
-      <div class="invalid-feedback">{{ toUsernameErrorMessage(registerForm.get('username')?.errors) }}</div>
+    <app-username-field
+      [usernameControl]="registerForm.controls.username"
+      [touched]="registerForm.controls.username.touched"
+      [errors]="registerForm.controls.username.errors"></app-username-field>
+    <app-password-field
+      [passwordControl]="registerForm.controls.password"
+      [touched]="registerForm.controls.password.touched"
+      [errors]="registerForm.controls.password.errors"></app-password-field>
+    <app-terms-field [termsControl]="registerForm.controls.terms" [touched]="registerForm.controls.terms.touched">
+      >
+    </app-terms-field>
+    <div class="text-danger" *ngIf="registerForm.errors?.['unknown']">
+      Une erreur inconnue est survenue pendant la création de votre compte.
     </div>
-    <label for="password" class="form-label">Mot de passe</label>
-    <div class="mb-3">
-      <div
-        class="input-group has-validation"
-        [class.is-invalid]="registerForm.get('password')?.touched && registerForm.get('password')?.invalid">
-        <i class="input-group-text ri ri-lock-line" aria-hidden="true"></i>
-        <input
-          id="password"
-          class="form-control form-control-lg border-start-0 border-end-0"
-          formControlName="password"
-          aria-describedby="passwordHelp"
-          appPasswordDisplay
-          #password="passwordDisplay"
-          [type]="password.isDisplayed ? 'text' : 'password'" />
-        <button
-          class="btn border border-start-0"
-          type="button"
-          [class.active]="password.isDisplayed"
-          (click)="password.toggleDisplay()">
-          <i
-            class="ri ri-lg align-middle"
-            [ngClass]="password.isDisplayed ? 'ri-eye-off-line text-primary' : 'ri-eye-line text-muted'"
-            aria-hidden="true"></i>
-          <span class="visually-hidden">Afficher le mot de passe</span>
-        </button>
-        <ul
-          class="invalid-feedback ps-3"
-          *ngIf="toPasswordErrorMessage(registerForm.get('password')?.errors) as passwordErrorMessages">
-          <li *ngFor="let passwordErrorMessage of passwordErrorMessages">{{ passwordErrorMessage }}</li>
-        </ul>
-      </div>
-      <div
-        *ngIf="registerForm.get('password')?.untouched || registerForm.get('password')?.valid"
-        id="passwordHelp"
-        class="form-text">
-        Doit contenir minuscule, majuscule, chiffre et caractère spécial
-      </div>
-    </div>
-    <div class="mb-3 form-check">
-      <input
-        type="checkbox"
-        class="form-check-input"
-        id="cgu"
-        formControlName="cgu"
-        [class.is-invalid]="registerForm.get('cgu')?.touched && registerForm.get('cgu')?.invalid" />
-      <label class="form-check-label" for="cgu">J'accepte les</label>
-      <a class="text-decoration-none ms-1" routerLink="cgu" target="_blank" rel="noopener">conditions d'utilisation</a>
-      <div class="invalid-feedback">Vous devez accepter les conditions d'utilisation</div>
-    </div>
-    <button type="submit" class="btn btn-primary mt-5 p-3 w-100" [disabled]="isLoading$ | async">
-      <ng-container *ngIf="isLoading$ | async; else createAccountText">
-        <span class="spinner-grow spinner-grow-sm me-2" role="status" aria-hidden="true"></span>
-        Création en cours...
-      </ng-container>
-      <ng-template #createAccountText>Créer mon compte</ng-template>
-    </button>
+    <app-submit [isLoading]="(isLoading$ | async) ?? false">
+      Créer mon compte
+      <ng-container slot="loading-text">Création en cours...</ng-container>
+    </app-submit>
   </form>
   <p class="mt-5 text-center">
     Vous avez déjà un compte&nbsp;?

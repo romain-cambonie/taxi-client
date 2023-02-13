@@ -21,6 +21,7 @@ export class ForgotPasswordPage {
       return;
     }
 
+    // todo: set username from login page if exist
     console.log(this.forgotPasswordForm);
   };
 

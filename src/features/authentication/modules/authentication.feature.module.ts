@@ -4,13 +4,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { DIRECTIVES } from '../directives';
 import { LAYOUTS } from '../layouts';
 import { PAGES } from '../pages';
-import { setRegisterFactory } from '../providers';
-import { inMemoryRegisterFactory } from '../factories/in-memory';
+import { COMPONENTS } from '../components';
+import { ACCOUNTS_PERSISTENCE, accountsValueProvider, registerFactoryProvider } from '../providers';
+import { inMemoryRegisterAction } from '../actions';
 import { AuthenticationFeatureRoutingModule } from './authentication.feature-routing.module';
 
 @NgModule({
-  declarations: [...DIRECTIVES, ...LAYOUTS, ...PAGES],
+  declarations: [...DIRECTIVES, ...LAYOUTS, ...PAGES, ...COMPONENTS],
   imports: [CommonModule, ReactiveFormsModule, AuthenticationFeatureRoutingModule],
-  providers: [setRegisterFactory(inMemoryRegisterFactory)]
+  providers: [accountsValueProvider(), registerFactoryProvider(inMemoryRegisterAction, [ACCOUNTS_PERSISTENCE])]
 })
 export class AuthenticationFeatureModule {}
