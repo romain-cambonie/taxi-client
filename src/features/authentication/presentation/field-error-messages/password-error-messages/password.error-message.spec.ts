@@ -1,28 +1,29 @@
-import { PasswordErrors, toPasswordErrorMessages } from './password.error-message';
+import { fieldErrorMessagesPresentation } from '../field-error-messages.presentation';
+import { PASSWORD_ERROR_MESSAGES, PasswordErrors } from './password.error-message';
 
-describe('password error message', (): void => {
+describe('password error messages', (): void => {
   it('should not get any password error message', (): void => {
     const errors: PasswordErrors = null;
 
-    const errorMessage: string[] = toPasswordErrorMessages(errors);
+    const errorMessage: string[] = fieldErrorMessagesPresentation(errors, PASSWORD_ERROR_MESSAGES);
 
-    expect(errorMessage).toEqual([]);
+    expect(errorMessage).toStrictEqual([]);
   });
 
-  it('should get required password error message', (): void => {
+  it('should get required error message', (): void => {
     const errors: PasswordErrors = { required: true };
 
-    const errorMessage: string[] = toPasswordErrorMessages(errors);
+    const errorMessage: string[] = fieldErrorMessagesPresentation(errors, PASSWORD_ERROR_MESSAGES);
 
-    expect(errorMessage).toEqual(['Saisissez le mot de passe de votre compte']);
+    expect(errorMessage).toStrictEqual(['Saisissez le mot de passe de votre compte']);
   });
 
   it('should get password min length error message', (): void => {
     const errors: PasswordErrors = { minlength: { requiredLength: 8, actualLength: 3 } };
 
-    const errorMessage: string[] = toPasswordErrorMessages(errors);
+    const errorMessage: string[] = fieldErrorMessagesPresentation(errors, PASSWORD_ERROR_MESSAGES);
 
-    expect(errorMessage).toEqual(['Le mot de passe doit contenir 8 caractères au minimum']);
+    expect(errorMessage).toStrictEqual(['Le mot de passe doit contenir 8 caractères au minimum']);
   });
 
   it('should get password required chars error messages', (): void => {
@@ -35,9 +36,9 @@ describe('password error message', (): void => {
       forbiddenTrailingSpace: { value: ' ££££££££ ' }
     };
 
-    const errorMessage: string[] = toPasswordErrorMessages(errors);
+    const errorMessage: string[] = fieldErrorMessagesPresentation(errors, PASSWORD_ERROR_MESSAGES);
 
-    expect(errorMessage).toEqual([
+    expect(errorMessage).toStrictEqual([
       'Le mot de passe doit contenir au moins un caractère spécial\xA0: []{}()<>.:;!?=*+-_\'"/@#%&',
       'Le mot de passe doit contenir au moins un chiffre',
       'Le mot de passe doit contenir au moins une lettre en majuscule',

@@ -12,7 +12,11 @@
       [class.is-invalid]="loginForm.get('username')?.touched && loginForm.get('username')?.invalid">
       <i class="input-group-text ri ri-mail-line" aria-hidden="true"></i>
       <input id="username" type="text" class="form-control form-control-lg border-start-0" formControlName="username" />
-      <div class="invalid-feedback">{{ toUsernameErrorMessage(loginForm.get('username')?.errors) }}</div>
+      <div
+        class="invalid-feedback"
+        *ngIf="loginForm.get('username')?.errors | fieldErrorMessages : 'username' as errorMessages">
+        {{ errorMessages.at(0) }}
+      </div>
     </div>
     <label for="password" class="form-label">Mot de passe</label>
     <div
@@ -37,8 +41,10 @@
           aria-hidden="true"></i>
         <span class="visually-hidden">Afficher le mot de passe</span>
       </button>
-      <div class="invalid-feedback" *ngIf="toPasswordErrorMessage(loginForm.get('password')?.errors) as passwordErrorMessages">
-        {{ passwordErrorMessages[0] }}
+      <div
+        class="invalid-feedback"
+        *ngIf="loginForm.controls.password.errors | fieldErrorMessages : 'password' as passwordErrorMessages">
+        {{ passwordErrorMessages.at(0) }}
       </div>
     </div>
     <div class="text-end mt-1"><a class="text-decoration-none" routerLink="/forgot-password">Mot de passe oublié ?</a></div>
