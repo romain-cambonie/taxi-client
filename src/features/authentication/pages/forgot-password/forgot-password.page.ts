@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
-import { toUsernameErrorMessage } from '../../presentation';
+import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 
 type ForgotPasswordForm = {
   username: string;
@@ -24,7 +23,4 @@ export class ForgotPasswordPage {
     // todo: set username from login page if exist
     console.log(this.forgotPasswordForm);
   };
-
-  public toUsernameErrorMessage = (usernameErrors?: ValidationErrors | null): string =>
-    usernameErrors == null ? '' : toUsernameErrorMessage(usernameErrors);
 }

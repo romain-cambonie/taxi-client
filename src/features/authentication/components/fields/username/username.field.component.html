@@ -3,6 +3,8 @@
   <div class="input-group mb-3 has-validation" [class.is-invalid]="usernameControl.touched && usernameControl.invalid">
     <i class="input-group-text ri ri-mail-line" aria-hidden="true"></i>
     <input id="username" type="text" class="form-control form-control-lg border-start-0" [formControl]="usernameControl" />
-    <div class="invalid-feedback">{{ toUsernameErrorMessage(errors) }}</div>
+    <div class="invalid-feedback" *ngIf="errors | fieldErrorMessages : 'username' as errorMessages">
+      {{ errorMessages.at(0) }}
+    </div>
   </div>
 </ng-container>

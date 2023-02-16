@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
-import { toPasswordErrorMessages, toUsernameErrorMessage } from '../../presentation';
+import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 
 type LoginForm = {
   username: string;
@@ -23,10 +22,4 @@ export class LoginPage {
       return;
     }
   };
-
-  public toUsernameErrorMessage = (usernameErrors?: ValidationErrors | null): string =>
-    usernameErrors == null ? '' : toUsernameErrorMessage(usernameErrors);
-
-  public toPasswordErrorMessage = (passwordErrors?: ValidationErrors | null): string[] =>
-    passwordErrors == null ? [] : toPasswordErrorMessages(passwordErrors);
 }

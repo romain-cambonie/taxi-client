@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { FormControl, ValidationErrors } from '@angular/forms';
-import { toUsernameErrorMessage } from '../../../presentation';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -15,7 +14,4 @@ export class UsernameFieldComponent {
   @Input() set touched(isTouched: boolean) {
     isTouched && this.usernameControl?.markAsTouched();
   }
-
-  public toUsernameErrorMessage = (usernameErrors?: ValidationErrors | null): string =>
-    usernameErrors == null ? '' : toUsernameErrorMessage(usernameErrors);
 }

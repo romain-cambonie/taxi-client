@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { FormControl, ValidationErrors } from '@angular/forms';
-import { toPasswordErrorMessages } from '../../../presentation';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -15,7 +14,4 @@ export class PasswordFieldComponent {
   @Input() set touched(isTouched: boolean) {
     isTouched && this.passwordControl?.markAsTouched();
   }
-
-  public toPasswordErrorMessage = (passwordErrors?: ValidationErrors | null): string[] =>
-    passwordErrors == null ? [] : toPasswordErrorMessages(passwordErrors);
 }
