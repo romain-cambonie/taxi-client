@@ -1,3 +1,4 @@
+import { WRONG_PASSWORD_ERROR_NAME, WrongPasswordError } from '../../../errors';
 import { fieldErrorMessagesPresentation } from '../field-error-messages.presentation';
 import { PASSWORD_ERROR_MESSAGES, PasswordErrors } from './password.error-message';
 
@@ -46,5 +47,13 @@ describe('password error messages', (): void => {
       'Le mot de passe ne doit pas commencer avec un espace',
       'Le mot de passe ne doit pas se terminer avec un espace'
     ]);
+  });
+
+  it('should get wrong password error message', (): void => {
+    const errors: PasswordErrors = { [WRONG_PASSWORD_ERROR_NAME]: new WrongPasswordError('0621369798') };
+
+    const errorMessage: string[] = fieldErrorMessagesPresentation(errors, PASSWORD_ERROR_MESSAGES);
+
+    expect(errorMessage).toStrictEqual(["Ce mot de passe ne correspond pas à l'identifiant 0621369798"]);
   });
 });

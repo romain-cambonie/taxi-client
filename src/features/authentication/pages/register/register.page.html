@@ -13,10 +13,13 @@
     <app-password-field
       [passwordControl]="registerForm.controls.password"
       [touched]="registerForm.controls.password.touched"
-      [errors]="registerForm.controls.password.errors"></app-password-field>
-    <app-terms-field [termsControl]="registerForm.controls.terms" [touched]="registerForm.controls.terms.touched">
-      >
-    </app-terms-field>
+      [errors]="registerForm.controls.password.errors"
+      [displayAllErrors]="true">
+      <ng-container slot="hint">Doit contenir minuscule, majuscule, chiffre et caractère spécial</ng-container>
+    </app-password-field>
+    <app-terms-field
+      [termsControl]="registerForm.controls.terms"
+      [touched]="registerForm.controls.terms.touched"></app-terms-field>
     <div class="text-danger" *ngIf="registerForm.errors?.['unknown']">
       Une erreur inconnue est survenue pendant la création de votre compte.
     </div>
@@ -27,6 +30,11 @@
   </form>
   <p class="mt-5 text-center">
     Vous avez déjà un compte&nbsp;?
-    <a class="text-decoration-none ms-1" routerLink="/login">Connectez-vous</a>
+    <a
+      class="text-decoration-none ms-1"
+      routerLink="/login"
+      [queryParams]="username.value ? { username: username.value } : null">
+      Connectez-vous
+    </a>
   </p>
 </div>
