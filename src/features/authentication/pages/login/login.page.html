@@ -6,52 +6,37 @@
     Vous pourrez continuer là où vous en étiez après vous être connecté.
   </p>
   <form class="mb-4" [formGroup]="loginForm" (ngSubmit)="onLogin()">
-    <label for="username" class="form-label">Adresse électronique ou numéro de téléphone portable</label>
-    <div
-      class="input-group mb-3 has-validation"
-      [class.is-invalid]="loginForm.get('username')?.touched && loginForm.get('username')?.invalid">
-      <i class="input-group-text ri ri-mail-line" aria-hidden="true"></i>
-      <input id="username" type="text" class="form-control form-control-lg border-start-0" formControlName="username" />
-      <div
-        class="invalid-feedback"
-        *ngIf="loginForm.get('username')?.errors | fieldErrorMessages : 'username' as errorMessages">
-        {{ errorMessages.at(0) }}
-      </div>
+    <app-username-field
+      [usernameControl]="username"
+      [touched]="username.touched"
+      [errors]="username.errors"></app-username-field>
+    <app-password-field
+      [passwordControl]="password"
+      [touched]="password.touched"
+      [errors]="password.errors"></app-password-field>
+    <div class="text-end mt-1">
+      <a
+        class="text-decoration-none"
+        routerLink="/forgot-password"
+        [queryParams]="username.value ? { username: username.value } : null">
+        Mot de passe oublié ?
+      </a>
     </div>
-    <label for="password" class="form-label">Mot de passe</label>
-    <div
-      class="input-group has-validation"
-      [class.is-invalid]="loginForm.get('password')?.touched && loginForm.get('password')?.invalid">
-      <i class="input-group-text ri ri-lock-line" aria-hidden="true"></i>
-      <input
-        id="password"
-        class="form-control form-control-lg border-start-0 border-end-0 rounded-0"
-        formControlName="password"
-        appPasswordDisplay
-        #password="passwordDisplay"
-        [type]="password.isDisplayed ? 'text' : 'password'" />
-      <button
-        class="btn border border-start-0"
-        type="button"
-        [class.active]="password.isDisplayed"
-        (click)="password.toggleDisplay()">
-        <i
-          class="ri ri-lg align-middle"
-          [ngClass]="password.isDisplayed ? 'ri-eye-off-line text-primary' : 'ri-eye-line text-muted'"
-          aria-hidden="true"></i>
-        <span class="visually-hidden">Afficher le mot de passe</span>
-      </button>
-      <div
-        class="invalid-feedback"
-        *ngIf="loginForm.controls.password.errors | fieldErrorMessages : 'password' as passwordErrorMessages">
-        {{ passwordErrorMessages.at(0) }}
-      </div>
+    <div class="text-danger" *ngIf="loginForm.errors?.['unknown']">
+      Une erreur inconnue est survenue pendant la connexion à votre compte.
     </div>
-    <div class="text-end mt-1"><a class="text-decoration-none" routerLink="/forgot-password">Mot de passe oublié ?</a></div>
-    <button type="submit" class="btn btn-primary mt-5 p-3 w-100">Se connecter</button>
+    <app-submit [isLoading]="(isLoading$ | async) ?? false">
+      Se connecter
+      <ng-container slot="loading-text">Connexion en cours...</ng-container>
+    </app-submit>
   </form>
   <p class="mt-5 text-center">
     Pas encore de compte&nbsp;?
-    <a class="text-decoration-none ms-1" routerLink="/register">Créez le dès à présent&nbsp;!</a>
+    <a
+      class="text-decoration-none ms-1"
+      routerLink="/register"
+      [queryParams]="username.value ? { username: username.value } : null">
+      Créez le dès à présent&nbsp;!
+    </a>
   </p>
 </div>

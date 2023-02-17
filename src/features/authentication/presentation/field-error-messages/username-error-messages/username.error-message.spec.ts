@@ -1,4 +1,9 @@
-import { ACCOUNT_ALREADY_EXIST_ERROR_NAME, AccountAlreadyExistError } from '../../../errors';
+import {
+  ACCOUNT_ALREADY_EXIST_ERROR_NAME,
+  AccountAlreadyExistError,
+  UNKNOWN_ACCOUNT_ERROR_NAME,
+  UnknownAccountError
+} from '../../../errors';
 import { fieldErrorMessagesPresentation } from '../field-error-messages.presentation';
 import { USERNAME_ERROR_MESSAGES, UsernameErrors } from './username.error-message';
 
@@ -33,5 +38,13 @@ describe('username error messages', (): void => {
     const errorMessage: string[] = fieldErrorMessagesPresentation(errors, USERNAME_ERROR_MESSAGES);
 
     expect(errorMessage).toStrictEqual(["Il existe déjà un compte associé à l'identifiant 0621369798"]);
+  });
+
+  it('should get unknown account error message', (): void => {
+    const errors: UsernameErrors = { [UNKNOWN_ACCOUNT_ERROR_NAME]: new UnknownAccountError('0621369798') };
+
+    const errorMessage: string[] = fieldErrorMessagesPresentation(errors, USERNAME_ERROR_MESSAGES);
+
+    expect(errorMessage).toStrictEqual(["Il n'existe aucun compte associé à l'identifiant 0621369798"]);
   });
 });

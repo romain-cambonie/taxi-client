@@ -1,6 +1,11 @@
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { passwordValidator, usernameValidator } from '../../validators';
-import { RegisterFormValues } from './register.presenter';
+
+export type RegisterFormValues = {
+  username: string;
+  password: string;
+  terms: boolean;
+};
 
 export const REGISTER_FORM: FormGroup<Record<keyof RegisterFormValues, FormControl>> = new FormGroup<
   Record<keyof RegisterFormValues, FormControl>

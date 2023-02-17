@@ -1,9 +1,15 @@
-import { ACCOUNT_ALREADY_EXIST_ERROR_NAME, AccountAlreadyExistError } from '../../../errors';
+import {
+  ACCOUNT_ALREADY_EXIST_ERROR_NAME,
+  AccountAlreadyExistError,
+  UNKNOWN_ACCOUNT_ERROR_NAME,
+  UnknownAccountError
+} from '../../../errors';
 
 export type UsernameErrors = {
   required?: boolean;
   invalidUsername?: { value: string };
   accountAlreadyExistError?: AccountAlreadyExistError;
+  unknownAccountError?: UnknownAccountError;
 } | null;
 
 export const USERNAME_ERROR_MESSAGES: Map<string, (errors: UsernameErrors) => string> = new Map([
@@ -17,5 +23,10 @@ export const USERNAME_ERROR_MESSAGES: Map<string, (errors: UsernameErrors) => st
     ACCOUNT_ALREADY_EXIST_ERROR_NAME,
     (usernameErrors: UsernameErrors): string =>
       `Il existe déjà un compte associé à l'identifiant ${usernameErrors?.accountAlreadyExistError?.username}`
+  ],
+  [
+    UNKNOWN_ACCOUNT_ERROR_NAME,
+    (usernameErrors: UsernameErrors): string =>
+      `Il n'existe aucun compte associé à l'identifiant ${usernameErrors?.unknownAccountError?.username}`
   ]
 ]);

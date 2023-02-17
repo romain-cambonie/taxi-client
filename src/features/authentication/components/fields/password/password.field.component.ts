@@ -11,6 +11,8 @@ export class PasswordFieldComponent {
 
   @Input() public errors?: ValidationErrors | null;
 
+  @Input() public displayAllErrors: boolean = false;
+
   @Input() set touched(isTouched: boolean) {
     isTouched && this.passwordControl?.markAsTouched();
   }
