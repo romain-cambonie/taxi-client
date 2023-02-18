@@ -31,7 +31,7 @@ export class ForgotPasswordPage {
   };
 
   private readonly _forgotPassword$: Observable<boolean> = this._isLoading$.pipe(
-    switchMap(whileLoading(() => this._forgotPasswordAction$(this.username.value, Math.random().toString(36).slice(-8)))),
+    switchMap(whileLoading(() => this._forgotPasswordAction$(this.username.value))),
     catchError(this.handleForgotPasswordActionError),
     map(() => STOP_LOADING)
   );

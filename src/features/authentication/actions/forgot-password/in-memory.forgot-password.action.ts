@@ -11,9 +11,11 @@ const setPasswordResetCode = (accountToReset: Account | undefined, resetPassword
 const unknownAccount = (accounts: Account[], username: string): boolean =>
   accounts.find((account: Account) => account.username === username) == null;
 
+const generateResetPasswordCode = (): string => Math.random().toString(36).slice(-8);
+
 export const inMemoryForgotPasswordAction =
   (accounts: Account[]) =>
-  (username: string, resetPasswordCode: string): Observable<void> => {
+  (username: string, resetPasswordCode: string = generateResetPasswordCode()): Observable<void> => {
     if (unknownAccount(accounts, username)) return throwError(() => new UnknownAccountError(username));
 
     return of(void 0).pipe(
