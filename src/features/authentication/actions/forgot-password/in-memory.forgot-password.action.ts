@@ -15,14 +15,13 @@ const generateResetPasswordCode = (): string => Math.random().toString(36).slice
 
 export const inMemoryForgotPasswordAction =
   (accounts: Account[]) =>
-  (username: string, resetPasswordCode: string = generateResetPasswordCode()): Observable<void> => {
-    if (unknownAccount(accounts, username)) return throwError(() => new UnknownAccountError(username));
-
-    return of(void 0).pipe(
-      delay(300),
-      tap(() => {
-        setPasswordResetCode(findAccountToReset(accounts, username), resetPasswordCode);
-        console.info(resetPasswordCode);
-      })
-    );
-  };
+  (username: string, resetPasswordCode: string = generateResetPasswordCode()): Observable<void> =>
+    unknownAccount(accounts, username)
+      ? throwError(() => new UnknownAccountError(username))
+      : of(void 0).pipe(
+          delay(300),
+          tap(() => {
+            setPasswordResetCode(findAccountToReset(accounts, username), resetPasswordCode);
+            console.info(resetPasswordCode);
+          })
+        );
