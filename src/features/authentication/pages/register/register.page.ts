@@ -43,6 +43,8 @@ export class RegisterPage {
     this._defaultUsername && this.username.setValue(this._defaultUsername);
   }
 
-  public onRegister = (): void =>
-    REGISTER_FORM.invalid ? REGISTER_FORM.markAllAsTouched() : this._isLoading$.next(START_LOADING);
+  public onRegister = (): void => {
+    REGISTER_FORM.markAllAsTouched();
+    REGISTER_FORM.valid && this._isLoading$.next(START_LOADING);
+  };
 }

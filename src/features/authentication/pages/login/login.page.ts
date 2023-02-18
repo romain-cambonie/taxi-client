@@ -43,5 +43,8 @@ export class LoginPage {
     this._defaultUsername && this.username.setValue(this._defaultUsername);
   }
 
-  public onLogin = (): void => (LOGIN_FORM.invalid ? LOGIN_FORM.markAllAsTouched() : this._isLoading$.next(START_LOADING));
+  public onLogin = (): void => {
+    LOGIN_FORM.markAllAsTouched();
+    LOGIN_FORM.valid && this._isLoading$.next(START_LOADING);
+  };
 }

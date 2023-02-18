@@ -15,7 +15,7 @@ export const inMemoryLoginAction =
     if (wrongPassword(accounts, username, password)) return throwError(() => new WrongPasswordError(username));
 
     return of(void 0).pipe(
-      delay(1000),
+      delay(300),
       tap(() => (session.isLoggedIn = true))
     );
   };

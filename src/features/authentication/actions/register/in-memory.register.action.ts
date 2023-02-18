@@ -11,6 +11,6 @@ export const inMemoryRegisterAction =
     alreadyRegistered(accounts, username)
       ? throwError(() => new AccountAlreadyExistError(username))
       : of(void 0).pipe(
-          delay(1000),
+          delay(300),
           tap(() => accounts.push({ username, password }))
         );

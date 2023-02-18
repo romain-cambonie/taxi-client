@@ -10,12 +10,13 @@ import {
   ACCOUNTS_PERSISTENCE,
   accountsValueProvider,
   fieldErrorMessagesValueProvider,
+  forgotPasswordFactoryProvider,
   loginFactoryProvider,
   registerFactoryProvider,
   SESSION_PERSISTENCE,
   sessionValueProvider
 } from '../providers';
-import { inMemoryLoginAction, inMemoryRegisterAction } from '../actions';
+import { inMemoryForgotPasswordAction, inMemoryLoginAction, inMemoryRegisterAction } from '../actions';
 import { ERROR_MESSAGES } from '../presentation';
 import { AuthenticationFeatureRoutingModule } from './authentication.feature-routing.module';
 
@@ -25,8 +26,9 @@ import { AuthenticationFeatureRoutingModule } from './authentication.feature-rou
   providers: [
     accountsValueProvider(),
     sessionValueProvider(),
-    registerFactoryProvider(inMemoryRegisterAction, [ACCOUNTS_PERSISTENCE]),
+    forgotPasswordFactoryProvider(inMemoryForgotPasswordAction, [ACCOUNTS_PERSISTENCE]),
     loginFactoryProvider(inMemoryLoginAction, [ACCOUNTS_PERSISTENCE, SESSION_PERSISTENCE]),
+    registerFactoryProvider(inMemoryRegisterAction, [ACCOUNTS_PERSISTENCE]),
     fieldErrorMessagesValueProvider(ERROR_MESSAGES)
   ]
 })
