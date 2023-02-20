@@ -13,4 +13,4 @@ const ROUTES: Routes = [
   exports: [RouterModule],
   imports: [RouterModule.forChild(ROUTES)]
 })
-export class StaticFeatureRoutingModule {}
+export class PublicFeatureRoutingModule {}

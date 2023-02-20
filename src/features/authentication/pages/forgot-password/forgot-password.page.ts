@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { catchError, map, mergeWith, Observable, Subject, switchMap } from 'rxjs';
+import { catchError, map, mergeWith, Observable, Subject, switchMap, tap } from 'rxjs';
 import { START_LOADING, STOP_LOADING, whileLoading } from '../../presentation';
 import { FORGOT_PASSWORD_ACTION, ForgotPasswordAction } from '../../providers';
 import { FORGOT_PASSWORD_FORM, setForgotPasswordErrorToForm } from './forgot-password.form';
@@ -33,6 +33,7 @@ export class ForgotPasswordPage {
   private readonly _forgotPassword$: Observable<boolean> = this._isLoading$.pipe(
     switchMap(whileLoading(() => this._forgotPasswordAction$(this.username.value))),
     catchError(this.handleForgotPasswordActionError),
+    tap(() => FORGOT_PASSWORD_FORM.reset()),
     map(() => STOP_LOADING)
   );
 

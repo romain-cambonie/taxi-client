@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'app-root',
-  templateUrl: './application-root-layout.component.html'
+  templateUrl: './home.page.html'
 })
-export class ApplicationRootLayout {}
+export class HomePage {}
