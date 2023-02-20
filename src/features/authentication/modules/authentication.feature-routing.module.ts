@@ -9,16 +9,19 @@ const ROUTES: Routes = [
       {
         component: LoginPage,
         path: 'login',
+        title: 'Taxi Gestion - Connexion',
         data: { animation: 'LoginPage' }
       },
       {
         component: RegisterPage,
         path: 'register',
+        title: 'Taxi Gestion - Créez votre compte',
         data: { animation: 'RegisterPage' }
       },
       {
         component: ForgotPasswordPage,
         path: 'forgot-password',
+        title: 'Taxi Gestion - Réinitialisation du mot de passe',
         data: { animation: 'ForgotPasswordPage' }
       }
     ],
