@@ -13,8 +13,7 @@ import {
   forgotPasswordFactoryProvider,
   loginFactoryProvider,
   registerFactoryProvider,
-  SESSION_PERSISTENCE,
-  sessionValueProvider
+  SESSION_PERSISTENCE
 } from '../providers';
 import { inMemoryForgotPasswordAction, inMemoryLoginAction, inMemoryRegisterAction } from '../actions';
 import { ERROR_MESSAGES } from '../presentation';
@@ -25,7 +24,6 @@ import { AuthenticationFeatureRoutingModule } from './authentication.feature-rou
   imports: [CommonModule, ReactiveFormsModule, AuthenticationFeatureRoutingModule],
   providers: [
     accountsValueProvider(),
-    sessionValueProvider(),
     forgotPasswordFactoryProvider(inMemoryForgotPasswordAction, [ACCOUNTS_PERSISTENCE]),
     loginFactoryProvider(inMemoryLoginAction, [ACCOUNTS_PERSISTENCE, SESSION_PERSISTENCE]),
     registerFactoryProvider(inMemoryRegisterAction, [ACCOUNTS_PERSISTENCE]),
