@@ -39,7 +39,7 @@ export class LoginPage {
   public readonly isLoading$: Observable<boolean> = this._isLoading$.pipe(mergeWith(this._login$));
 
   public constructor(
-    @Inject(LOGIN_ACTION) private readonly _loginAction$: LoginAction,
+    @Inject(LOGIN_ACTION) private readonly _loginAction$: LoginAction<void>,
     @Inject(REDIRECT_ROUTES_PERSISTENCE) private readonly _toRoutes: Map<RedirectRoutesKeys, string>,
     private readonly _route: ActivatedRoute,
     private readonly _router: Router

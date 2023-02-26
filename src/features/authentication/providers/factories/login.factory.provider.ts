@@ -1,12 +1,12 @@
 import { FactoryProvider } from '@angular/core';
 import { Observable } from 'rxjs';
 
-export type LoginAction = (username: string, password: string) => Observable<void>;
+export type LoginAction<T> = (username: string, password: string) => Observable<T>;
 
 export const LOGIN_ACTION = 'authentication.login.action' as const;
 
-export const loginFactoryProvider = <TDependencies>(
-  useFactory: (...providers: never) => LoginAction,
+export const loginFactoryProvider = <TDependencies, TResult>(
+  useFactory: (...providers: never) => LoginAction<TResult>,
   deps: TDependencies[] = []
 ): FactoryProvider => ({
   provide: LOGIN_ACTION,

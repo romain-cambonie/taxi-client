@@ -41,7 +41,7 @@ export class RegisterPage {
   public readonly isLoading$: Observable<boolean> = this._isLoading$.pipe(mergeWith(this._register$));
 
   public constructor(
-    @Inject(REGISTER_ACTION) private readonly _registerAction$: RegisterAction,
+    @Inject(REGISTER_ACTION) private readonly _registerAction$: RegisterAction<void>,
     @Inject(REDIRECT_ROUTES_PERSISTENCE) private readonly _toRoutes: Map<RedirectRoutesKeys, string>,
     private readonly _route: ActivatedRoute,
     private readonly _router: Router
