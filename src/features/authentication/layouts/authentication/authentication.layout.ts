@@ -9,6 +9,8 @@ import { slideInAnimation } from '../../animations';
       ['LoginPage', 'ForgotPasswordPage'],
       ['LoginPage', 'RegisterPage'],
       ['RegisterPage', 'LoginPage'],
+      ['RegisterPage', 'ActivatePage'],
+      ['ActivatePage', 'LoginPage'],
       ['ForgotPasswordPage', 'LoginPage']
     ])
   ],

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthenticationLayout } from '../layouts';
-import { ForgotPasswordPage, LoginPage, RegisterPage } from '../pages';
+import { ActivatePage, ForgotPasswordPage, LoginPage, RegisterPage } from '../pages';
 
 const ROUTES: Routes = [
   {
@@ -23,6 +23,12 @@ const ROUTES: Routes = [
         path: 'forgot-password',
         title: 'Taxi Gestion - Réinitialisation du mot de passe',
         data: { animation: 'ForgotPasswordPage' }
+      },
+      {
+        component: ActivatePage,
+        path: 'activate',
+        title: 'Taxi Gestion - Activation de votre compte',
+        data: { animation: 'ActivatePage' }
       }
     ],
     component: AuthenticationLayout,
