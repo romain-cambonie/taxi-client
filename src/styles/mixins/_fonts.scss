@@ -13,7 +13,7 @@
 
     font-display: swap;
     @if list.index($font-extensions, eot) {
-      src: string.unquote("url('" + $font-path + ".eot')");
+      src: string.unquote("url('#{$font-path}.eot')");
     }
 
     src: font-face-src($font-family, $font-path, $font-extensions);
