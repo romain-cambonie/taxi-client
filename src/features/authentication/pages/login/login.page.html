@@ -22,8 +22,11 @@
         Mot de passe oublié ?
       </a>
     </div>
-    <div class="text-danger" *ngIf="loginForm.errors?.['unknown']">
+    <div class="text-danger mt-2" *ngIf="loginForm.errors?.['unknown']">
       Une erreur inconnue est survenue pendant la connexion à votre compte.
+    </div>
+    <div class="text-danger mt-2" *ngIf="loginForm.errors?.['invalidUsernameOrPasswordError']">
+      L'identifiant ou le mot de passe est invalide.
     </div>
     <app-submit [isLoading]="(isLoading$ | async) ?? false">
       Se connecter

@@ -1,4 +1,4 @@
-import { UNKNOWN_ACCOUNT_ERROR_NAME, WRONG_PASSWORD_ERROR_NAME } from '../../errors';
+import { INVALID_USERNAME_OR_PASSWORD_ERROR_NAME, UNKNOWN_ACCOUNT_ERROR_NAME, WRONG_PASSWORD_ERROR_NAME } from '../../errors';
 
 export type FormattedLoginError = { field?: string; errors: Record<string, unknown> };
 
@@ -18,6 +18,14 @@ const loginErrorFormatMap: Map<string, (error: Error) => FormattedLoginError> = 
       field: 'password',
       errors: {
         [WRONG_PASSWORD_ERROR_NAME]: error
+      }
+    })
+  ],
+  [
+    INVALID_USERNAME_OR_PASSWORD_ERROR_NAME,
+    (error: Error) => ({
+      errors: {
+        [INVALID_USERNAME_OR_PASSWORD_ERROR_NAME]: error
       }
     })
   ]
