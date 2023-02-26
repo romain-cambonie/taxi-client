@@ -3,6 +3,7 @@ import { RouterModule } from '@angular/router';
 import { Routes } from '@angular/router';
 import { CanMatchGuestGuard, CanMatchLoggedInGuard } from '@features/authentication';
 import { MainLayout } from '../layouts';
+import { AUTHENTICATION_PROVIDERS } from '../providers';
 
 const ROUTES: Routes = [
   {
@@ -19,7 +20,8 @@ const ROUTES: Routes = [
   {
     loadChildren: async () => (await import('@features/authentication')).AuthenticationFeatureModule,
     path: '',
-    canMatch: [CanMatchGuestGuard]
+    canMatch: [CanMatchGuestGuard],
+    providers: [...AUTHENTICATION_PROVIDERS]
   },
   { path: '**', pathMatch: 'full', redirectTo: '/' }
 ];
