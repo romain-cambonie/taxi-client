@@ -1,4 +1,10 @@
-import { PasswordFieldComponent, TermsFieldComponent, UsernameFieldComponent } from './fields';
+import { CodeFieldComponent, PasswordFieldComponent, TermsFieldComponent, UsernameFieldComponent } from './fields';
 import { SubmitComponent } from './submit/submit.component';
 
-export const COMPONENTS = [PasswordFieldComponent, TermsFieldComponent, UsernameFieldComponent, SubmitComponent];
+export const COMPONENTS = [
+  CodeFieldComponent,
+  PasswordFieldComponent,
+  TermsFieldComponent,
+  UsernameFieldComponent,
+  SubmitComponent
+];
