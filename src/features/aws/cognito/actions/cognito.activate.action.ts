@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, Observable, throwError } from 'rxjs';
 import { InvalidCodeError } from '@features/authentication';
-import { Cognito } from '../../providers';
+import { Cognito } from '../providers';
 
 const ACTIVATE_HEADERS: Record<string, string> = {
   'X-Amz-Target': 'AWSCognitoIdentityProviderService.ConfirmSignUp',
@@ -10,7 +10,7 @@ const ACTIVATE_HEADERS: Record<string, string> = {
 
 const activateUrl = (cognito: Cognito): string => `https://cognito-idp.${cognito.region}.amazonaws.com`;
 
-const handleActivateError =
+const handleActivateError$ =
   (code: string) =>
   (errorResponse: HttpErrorResponse, caught: Observable<object>): Observable<object> => {
     switch (errorResponse.error.__type) {
@@ -21,7 +21,7 @@ const handleActivateError =
     }
   };
 
-export const cognitoActivateAction =
+export const cognitoActivateAction$ =
   (http: HttpClient, cognito: Cognito) =>
   (username: string, code: string): Observable<object> =>
     http
@@ -34,4 +34,4 @@ export const cognitoActivateAction =
         },
         { headers: ACTIVATE_HEADERS }
       )
-      .pipe(catchError(handleActivateError(code)));
+      .pipe(catchError(handleActivateError$(code)));

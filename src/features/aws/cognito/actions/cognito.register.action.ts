@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, Observable, throwError } from 'rxjs';
 import { AccountAlreadyExistError } from '@features/authentication';
-import { Cognito } from '../../providers';
+import { Cognito } from '../providers';
 
 const REGISTER_HEADERS: Record<string, string> = {
   'X-Amz-Target': 'AWSCognitoIdentityProviderService.SignUp',
@@ -10,7 +10,7 @@ const REGISTER_HEADERS: Record<string, string> = {
 
 const registerUrl = (cognito: Cognito): string => `https://cognito-idp.${cognito.region}.amazonaws.com`;
 
-const handleRegisterError =
+const handleRegisterError$ =
   (username: string) =>
   (errorResponse: HttpErrorResponse, caught: Observable<object>): Observable<object> => {
     switch (errorResponse.error.__type) {
@@ -21,7 +21,7 @@ const handleRegisterError =
     }
   };
 
-export const cognitoRegisterAction =
+export const cognitoRegisterAction$ =
   (http: HttpClient, cognito: Cognito) =>
   (username: string, password: string): Observable<object> =>
     http
@@ -34,4 +34,4 @@ export const cognitoRegisterAction =
         },
         { headers: REGISTER_HEADERS }
       )
-      .pipe(catchError(handleRegisterError(username)));
+      .pipe(catchError(handleRegisterError$(username)));

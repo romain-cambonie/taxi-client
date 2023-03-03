@@ -6,7 +6,7 @@ export type Session = {
 
 export const SESSION_PERSISTENCE = 'authentication.session.persistence' as const;
 
-export const sessionValueProvider = (useValue: Session = { isLoggedIn: false }): ValueProvider => ({
-  useValue,
+export const sessionValueProvider = (isLoggedIn: boolean): ValueProvider => ({
+  useValue: { isLoggedIn },
   provide: SESSION_PERSISTENCE
 });

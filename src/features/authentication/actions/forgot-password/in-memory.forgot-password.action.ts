@@ -13,7 +13,7 @@ const unknownAccount = (accounts: Account[], username: string): boolean =>
 
 const generateResetPasswordCode = (): string => Math.random().toString(36).slice(-8);
 
-export const inMemoryForgotPasswordAction =
+export const inMemoryForgotPasswordAction$ =
   (accounts: Account[]) =>
   (username: string, resetPasswordCode: string = generateResetPasswordCode()): Observable<void> =>
     unknownAccount(accounts, username)

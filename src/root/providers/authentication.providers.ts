@@ -4,23 +4,24 @@ import {
   accountsValueProvider,
   activateFactoryProvider,
   forgotPasswordFactoryProvider,
-  inMemoryForgotPasswordAction,
+  inMemoryForgotPasswordAction$,
   loginFactoryProvider,
-  registerFactoryProvider
+  registerFactoryProvider,
+  SESSION_PERSISTENCE
 } from '@features/authentication';
 import {
   COGNITO_PERSISTENCE,
-  cognitoActivateAction,
-  cognitoLoginAction,
-  cognitoRegisterAction,
+  cognitoActivateAction$,
+  cognitoLoginAction$,
+  cognitoRegisterAction$,
   cognitoValueProvider
 } from '@features/aws';
 
 export const AUTHENTICATION_PROVIDERS = [
   accountsValueProvider(),
-  forgotPasswordFactoryProvider(inMemoryForgotPasswordAction, [ACCOUNTS_PERSISTENCE]),
+  forgotPasswordFactoryProvider(inMemoryForgotPasswordAction$, [ACCOUNTS_PERSISTENCE]),
   cognitoValueProvider({ clientId: '2meamgceq5phrr2ntviadvad12', region: 'eu-west-1' }),
-  activateFactoryProvider(cognitoActivateAction, [HttpClient, COGNITO_PERSISTENCE]),
-  loginFactoryProvider(cognitoLoginAction, [HttpClient, COGNITO_PERSISTENCE]),
-  registerFactoryProvider(cognitoRegisterAction, [HttpClient, COGNITO_PERSISTENCE])
+  activateFactoryProvider(cognitoActivateAction$, [HttpClient, COGNITO_PERSISTENCE]),
+  loginFactoryProvider(cognitoLoginAction$, [HttpClient, COGNITO_PERSISTENCE, SESSION_PERSISTENCE]),
+  registerFactoryProvider(cognitoRegisterAction$, [HttpClient, COGNITO_PERSISTENCE])
 ];
