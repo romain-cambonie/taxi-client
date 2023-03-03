@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { catchError, from, map, mergeWith, Observable, Subject, switchMap, tap } from 'rxjs';
-import { START_LOADING, STOP_LOADING, whileLoading } from '../../presentation';
+import { START_LOADING, STOP_LOADING, toInternationalFormat, whileLoading } from '../../presentation';
 import { LOGIN_ACTION, LoginAction, REDIRECT_ROUTES_PERSISTENCE, RedirectRoutesKeys } from '../../providers';
 import { LOGIN_FORM, LoginFormValues, setLoginErrorToForm } from './login.form';
 import { formatLoginError } from './login.presenter';
@@ -29,7 +29,7 @@ export class LoginPage {
   };
 
   private readonly _login$: Observable<boolean> = this._isLoading$.pipe(
-    switchMap(whileLoading(() => this._loginAction$(this.username.value, this.password.value))),
+    switchMap(whileLoading(() => this._loginAction$(toInternationalFormat(this.username.value), this.password.value))),
     catchError(this.handleLoginActionError),
     tap(() => from(this._router.navigate([this._toRoutes.get('login')]))),
     tap(() => LOGIN_FORM.reset()),

@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { catchError, from, map, mergeWith, Observable, Subject, switchMap, tap } from 'rxjs';
-import { START_LOADING, STOP_LOADING, whileLoading } from '../../presentation';
+import { START_LOADING, STOP_LOADING, toInternationalFormat, whileLoading } from '../../presentation';
 import { ACTIVATE_ACTION, ActivateAction, REDIRECT_ROUTES_PERSISTENCE, RedirectRoutesKeys } from '../../providers';
 import { ACTIVATE_FORM, ActivateFormValues, setActivateErrorToForm } from './activate.form';
 import { formatActivateError } from './activate.presenter';
@@ -31,7 +31,7 @@ export class ActivatePage {
   };
 
   private readonly _activate$: Observable<boolean> = this._isLoading$.pipe(
-    switchMap(whileLoading(() => this._activateAction$(this.username.value, this.code.value))),
+    switchMap(whileLoading(() => this._activateAction$(toInternationalFormat(this.username.value), this.code.value))),
     catchError(this.handleActivateActionError),
     tap(() => from(this._router.navigate([this._toRoutes.get('activate')]))),
     tap(() => ACTIVATE_FORM.reset()),

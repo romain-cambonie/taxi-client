@@ -3,7 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { catchError, from, map, mergeWith, Observable, Subject, switchMap, tap } from 'rxjs';
 import { RegisterAction, REGISTER_ACTION, REDIRECT_ROUTES_PERSISTENCE, RedirectRoutesKeys } from '../../providers';
-import { START_LOADING, STOP_LOADING, whileLoading } from '../../presentation';
+import { START_LOADING, STOP_LOADING, toInternationalFormat, whileLoading } from '../../presentation';
 import { formatRegisterError } from './register.presenter';
 import { REGISTER_FORM, RegisterFormValues, setRegisterErrorToForm } from './register.form';
 
@@ -29,7 +29,7 @@ export class RegisterPage {
   };
 
   private readonly _register$: Observable<boolean> = this._isLoading$.pipe(
-    switchMap(whileLoading(() => this._registerAction$(this.username.value, this.password.value))),
+    switchMap(whileLoading(() => this._registerAction$(toInternationalFormat(this.username.value), this.password.value))),
     catchError(this.handleRegisterActionError),
     tap(() =>
       from(this._router.navigate([this._toRoutes.get('register')], { queryParams: { username: this.username.value } }))

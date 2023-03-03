@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { isPhone } from '../validators/username/is-phone';
+import { isPhone } from '../presentation';
 
 @Pipe({ name: 'isPhone' })
 export class IsPhonePipe implements PipeTransform {
