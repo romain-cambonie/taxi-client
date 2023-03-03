@@ -2,13 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, Observable, tap, throwError } from 'rxjs';
 import { InvalidUsernameOrPasswordError, Session } from '@features/authentication';
 import { Cognito } from '../providers';
-import {
-  ACCESS_TOKEN_STORAGE_KEY,
-  CognitoAuthentication,
-  EXPIRES_IN_STORAGE_KEY,
-  ID_TOKEN_STORAGE_KEY,
-  REFRESH_TOKEN_STORAGE_KEY
-} from '@features/aws/cognito/authentication/cognito-authentication';
+import { CognitoAuthentication, setCognitoAuthenticationToLocalStorage } from '../authentication';
 
 type LoginResponse = { AuthenticationResult: CognitoAuthentication };
 
@@ -30,13 +24,6 @@ const handleLoginError$ =
     }
   };
 
-const setCognitoAuthenticationToLocalStorage = (loginResponse: LoginResponse): void => {
-  localStorage.setItem(ACCESS_TOKEN_STORAGE_KEY, loginResponse.AuthenticationResult.AccessToken);
-  localStorage.setItem(ID_TOKEN_STORAGE_KEY, loginResponse.AuthenticationResult.IdToken);
-  localStorage.setItem(REFRESH_TOKEN_STORAGE_KEY, loginResponse.AuthenticationResult.RefreshToken);
-  localStorage.setItem(EXPIRES_IN_STORAGE_KEY, loginResponse.AuthenticationResult.ExpiresIn.toString());
-};
-
 export const cognitoLoginAction$ =
   (http: HttpClient, cognito: Cognito, session: Session) =>
   (username: string, password: string): Observable<LoginResponse> =>
@@ -56,5 +43,5 @@ export const cognitoLoginAction$ =
       .pipe(
         catchError(handleLoginError$()),
         tap(() => (session.isLoggedIn = true)),
-        tap((loginResponse: LoginResponse) => setCognitoAuthenticationToLocalStorage(loginResponse))
+        tap((loginResponse: LoginResponse) => setCognitoAuthenticationToLocalStorage(loginResponse.AuthenticationResult))
       );
