@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { catchError, from, map, mergeWith, Observable, Subject, switchMap, tap } from 'rxjs';
+import { ACCOUNT_NOT_ACTIVATED_ERROR_NAME } from '@features/authentication';
 import { START_LOADING, STOP_LOADING, toInternationalFormat, whileLoading } from '../../presentation';
 import { LOGIN_ACTION, LoginAction, REDIRECT_ROUTES_PERSISTENCE, RedirectRoutesKeys } from '../../providers';
 import { LOGIN_FORM, LoginFormValues, setLoginErrorToForm } from './login.form';
@@ -23,10 +24,17 @@ export class LoginPage {
   private readonly _defaultUsername: string | null = this._route.snapshot.queryParamMap.get('username');
 
   private handleLoginActionError = (error: Error, caught: Observable<void>): Observable<void> => {
-    setLoginErrorToForm(formatLoginError(error));
+    error.name === ACCOUNT_NOT_ACTIVATED_ERROR_NAME
+      ? this.needAccountActivation()
+      : setLoginErrorToForm(formatLoginError(error));
+
     this._isLoading$.next(STOP_LOADING);
     return caught;
   };
+
+  private needAccountActivation() {
+    this._router.navigate([this._toRoutes.get('not-activated')], { queryParams: { username: this.username.value } });
+  }
 
   private readonly _login$: Observable<boolean> = this._isLoading$.pipe(
     switchMap(whileLoading(() => this._loginAction$(toInternationalFormat(this.username.value), this.password.value))),

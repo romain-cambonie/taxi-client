@@ -8,6 +8,7 @@ import { slideInAnimation } from '../../animations';
     slideInAnimation([
       ['LoginPage', 'ForgotPasswordPage'],
       ['LoginPage', 'RegisterPage'],
+      ['LoginPage', 'ActivatePage'],
       ['RegisterPage', 'LoginPage'],
       ['RegisterPage', 'ActivatePage'],
       ['ActivatePage', 'LoginPage'],
