@@ -1,4 +1,4 @@
-import { isPhone } from './is-phone';
+import { isPhone, toInternationalFormat } from './phone.presenter';
 
 describe('phone validator', (): void => {
   it('should not validate empty string as phone number', (): void => {
@@ -47,5 +47,29 @@ describe('phone validator', (): void => {
     const isValid: boolean = isPhone('0033612864587');
 
     expect(isValid).toBe(true);
+  });
+
+  it('should non format phone if username is email', (): void => {
+    const formattedPhone: string = toInternationalFormat('test@taxi-gestion.com');
+
+    expect(formattedPhone).toBe('test@taxi-gestion.com');
+  });
+
+  it('should format phone by adding missing french international prefix', (): void => {
+    const formattedPhone: string = toInternationalFormat('0614863215');
+
+    expect(formattedPhone).toBe('+33614863215');
+  });
+
+  it('should format phone by fixing french international prefix', (): void => {
+    const formattedPhone: string = toInternationalFormat('0033614863745');
+
+    expect(formattedPhone).toBe('+33614863745');
+  });
+
+  it('should format phone by removing unexpected chars', (): void => {
+    const formattedPhone: string = toInternationalFormat('06-14-86-37-45');
+
+    expect(formattedPhone).toBe('+33614863745');
   });
 });

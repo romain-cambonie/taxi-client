@@ -11,7 +11,7 @@
           [class.show]="dropdownPane.expanded$ | async"
           [attr.aria-expanded]="dropdownPane.expanded$ | async"
           (click)="dropdownPane.toggle()">
-          <i class="ri fs-3 ri-account-circle-fill" title="Mon compte" aria-hidden="true"></i>
+          <i class="fs-3 ri-account-circle-fill" title="Mon compte" aria-hidden="true"></i>
           <small class="ms-2 d-lg-none">Mon compte</small>
         </button>
         <ul
@@ -22,7 +22,7 @@
           [dropdownControl]="dropdownControl">
           <li>
             <button class="dropdown-item" type="button" (click)="onLogout()">
-              <i class="ri ri-logout-box-r-line me-1 align-bottom" aria-hidden="true"></i>
+              <i class="ri-logout-box-r-line me-1 align-bottom" aria-hidden="true"></i>
               Déconnexion
             </button>
           </li>

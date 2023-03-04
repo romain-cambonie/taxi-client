@@ -8,7 +8,7 @@ const unknownAccount = (accounts: Account[], username: string): boolean =>
 const wrongPassword = (accounts: Account[], username: string, password: string): boolean =>
   accounts.find((account: Account) => account.username === username)?.password !== password;
 
-export const inMemoryLoginAction =
+export const inMemoryLoginAction$ =
   (accounts: Account[], session: Session) =>
   (username: string, password: string): Observable<void> => {
     if (unknownAccount(accounts, username)) return throwError(() => new UnknownAccountError(username));

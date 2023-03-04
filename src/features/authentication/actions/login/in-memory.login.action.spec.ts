@@ -1,7 +1,7 @@
 import { firstValueFrom } from 'rxjs';
 import { UnknownAccountError, WrongPasswordError } from '../../errors';
 import { Account, Session } from '../../providers';
-import { inMemoryLoginAction } from './in-memory.login.action';
+import { inMemoryLoginAction$ } from './in-memory.login.action';
 
 describe('in memory login action', (): void => {
   it('should login with existing account', async (): Promise<void> => {
@@ -9,7 +9,7 @@ describe('in memory login action', (): void => {
     const account: Account = { username: 'test@taxi-gestion.com', password: '5Hx$M8/y' };
     const accounts: Account[] = [account];
 
-    await firstValueFrom(inMemoryLoginAction(accounts, session)(account.username, account.password));
+    await firstValueFrom(inMemoryLoginAction$(accounts, session)(account.username, account.password));
 
     expect(session.isLoggedIn).toStrictEqual(true);
   });
@@ -20,7 +20,7 @@ describe('in memory login action', (): void => {
     const accounts: Account[] = [account];
 
     await expect(
-      firstValueFrom(inMemoryLoginAction(accounts, session)('unknown@taxi-gestion.com', account.password))
+      firstValueFrom(inMemoryLoginAction$(accounts, session)('unknown@taxi-gestion.com', account.password))
     ).rejects.toEqual(new UnknownAccountError('unknown@taxi-gestion.com'));
   });
 
@@ -29,9 +29,9 @@ describe('in memory login action', (): void => {
     const account: Account = { username: 'test@taxi-gestion.com', password: '5Hx$M8/y' };
     const accounts: Account[] = [account];
 
-    await firstValueFrom(inMemoryLoginAction(accounts, session)(account.username, account.password));
+    await firstValueFrom(inMemoryLoginAction$(accounts, session)(account.username, account.password));
 
-    await expect(firstValueFrom(inMemoryLoginAction(accounts, session)(account.username, 'wrong'))).rejects.toEqual(
+    await expect(firstValueFrom(inMemoryLoginAction$(accounts, session)(account.username, 'wrong'))).rejects.toEqual(
       new WrongPasswordError(account.username)
     );
   });

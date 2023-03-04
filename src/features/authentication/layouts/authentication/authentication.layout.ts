@@ -9,13 +9,15 @@ import { slideInAnimation } from '../../animations';
       ['LoginPage', 'ForgotPasswordPage'],
       ['LoginPage', 'RegisterPage'],
       ['RegisterPage', 'LoginPage'],
+      ['RegisterPage', 'ActivatePage'],
+      ['ActivatePage', 'LoginPage'],
       ['ForgotPasswordPage', 'LoginPage']
     ])
   ],
   templateUrl: './authentication.layout.html'
 })
 export class AuthenticationLayout {
-  public readonly curentYear: number = new Date().getFullYear();
+  public readonly currentYear: number = new Date().getFullYear();
 
   public constructor(private readonly _contexts: ChildrenOutletContexts) {}
 
