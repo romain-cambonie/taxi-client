@@ -24,7 +24,7 @@ const redirectToRoutes: Map<RedirectRoutesKeys, string> = new Map<RedirectRoutes
 ]);
 
 export const APPLICATION_PROVIDERS = [
-  cognitoValueProvider({ clientId: '2meamgceq5phrr2ntviadvad12', region: 'eu-west-1' }),
+  cognitoValueProvider({ clientId: '6dnu0mkd0k5v4pdg9f36vnv0q6', region: 'us-east-1' }),
   sessionValueProvider(cognitoTokenSession()),
   redirectRoutesValueProvider(redirectToRoutes),
   logoutFactoryProvider(cognitoLogoutAction, [SESSION_PERSISTENCE]),
