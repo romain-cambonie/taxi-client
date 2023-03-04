@@ -6,7 +6,7 @@ export type ActivateAction = (username: string, code: string) => Observable<obje
 export const ACTIVATE_ACTION = 'authentication.activate.action' as const;
 
 export const activateFactoryProvider = <TDependencies>(
-  useFactory: (...providers: never) => ActivateAction,
+  useFactory: (...providers: never[]) => ActivateAction,
   deps: TDependencies[] = []
 ): FactoryProvider => ({
   provide: ACTIVATE_ACTION,

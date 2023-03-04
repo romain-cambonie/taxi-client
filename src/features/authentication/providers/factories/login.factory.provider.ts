@@ -6,7 +6,7 @@ export type LoginAction<T> = (username: string, password: string) => Observable<
 export const LOGIN_ACTION = 'authentication.login.action' as const;
 
 export const loginFactoryProvider = <TDependencies, TResult>(
-  useFactory: (...providers: never) => LoginAction<TResult>,
+  useFactory: (...providers: never[]) => LoginAction<TResult>,
   deps: TDependencies[] = []
 ): FactoryProvider => ({
   provide: LOGIN_ACTION,
