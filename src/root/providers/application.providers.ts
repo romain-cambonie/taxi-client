@@ -1,10 +1,12 @@
 import {
+  forwardBearerTokenFactoryProvider,
   logoutFactoryProvider,
   RedirectRoutesKeys,
   redirectRoutesValueProvider,
   refreshTokenFactoryProvider,
   SESSION_PERSISTENCE,
-  sessionValueProvider
+  sessionValueProvider,
+  forwardBearerTokenInterceptorMaker
 } from '@features/authentication';
 import { HttpClient } from '@angular/common/http';
 import {
@@ -14,6 +16,7 @@ import {
   cognitoTokenSession,
   cognitoValueProvider
 } from '@features/aws';
+import {} from '../../features/authentication/interceptors/forward-bearer-token.interceptor';
 
 const redirectToRoutes: Map<RedirectRoutesKeys, string> = new Map<RedirectRoutesKeys, string>([
   ['activate', '/login'],
@@ -28,5 +31,13 @@ export const APPLICATION_PROVIDERS = [
   sessionValueProvider(cognitoTokenSession()),
   redirectRoutesValueProvider(redirectToRoutes),
   logoutFactoryProvider(cognitoLogoutAction, [SESSION_PERSISTENCE]),
-  refreshTokenFactoryProvider(cognitoRefreshTokenAction$, [HttpClient, COGNITO_PERSISTENCE, SESSION_PERSISTENCE])
+  refreshTokenFactoryProvider(cognitoRefreshTokenAction$, [HttpClient, COGNITO_PERSISTENCE, SESSION_PERSISTENCE]),
+  forwardBearerTokenFactoryProvider(
+    forwardBearerTokenInterceptorMaker(/\/api/, () => {
+      console.log('GetToken execution !');
+      const token = localStorage.getItem('aws.cognito.access-token');
+      console.log('Token :', token);
+      return token;
+    })
+  )
 ];
