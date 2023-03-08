@@ -1,1 +1,6 @@
 <h1>Tableau de bord</h1>
+
+<ng-container *ngIf="fares$ | async as fares">
+  <h2>Courses de la journée ({{ fares.at(0)?.date }})</h2>
+  <app-fare-list [fares]="fares"></app-fare-list>
+</ng-container>
