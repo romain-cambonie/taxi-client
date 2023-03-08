@@ -17,6 +17,7 @@
         "plugin:jest/recommended"
       ],
       "rules": {
+        "no-console": "error",
         "@angular-eslint/directive-selector": [
           "error",
           {

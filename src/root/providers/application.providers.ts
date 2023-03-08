@@ -33,11 +33,6 @@ export const APPLICATION_PROVIDERS = [
   logoutFactoryProvider(cognitoLogoutAction, [SESSION_PERSISTENCE]),
   refreshTokenFactoryProvider(cognitoRefreshTokenAction$, [HttpClient, COGNITO_PERSISTENCE, SESSION_PERSISTENCE]),
   forwardBearerTokenFactoryProvider(
-    forwardBearerTokenInterceptorMaker(/\/api/, () => {
-      console.log('GetToken execution !');
-      const token = localStorage.getItem('aws.cognito.access-token');
-      console.log('Token :', token);
-      return token;
-    })
+    forwardBearerTokenInterceptorMaker(/\/api/, () => localStorage.getItem('aws.cognito.access-token'))
   )
 ];
