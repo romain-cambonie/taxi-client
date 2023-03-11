@@ -4,13 +4,15 @@ import { Routes } from '@angular/router';
 import { CanMatchGuestGuard, CanMatchLoggedInGuard, CanMatchRefreshTokenGuard } from '@features/authentication';
 import { MainLayout } from '../layouts';
 import { AUTHENTICATION_PROVIDERS } from '../providers';
+import { DASHBOARD_PROVIDERS } from '../providers/dashboard.providers';
 
 const ROUTES: Routes = [
   {
     loadChildren: async () => (await import('@features/dashboard')).DashboardFeatureModule,
     component: MainLayout,
     path: '',
-    canMatch: [CanMatchRefreshTokenGuard, CanMatchLoggedInGuard]
+    canMatch: [CanMatchRefreshTokenGuard, CanMatchLoggedInGuard],
+    providers: [...DASHBOARD_PROVIDERS]
   },
   {
     loadChildren: async () => (await import('@features/public')).PublicFeatureModule,

@@ -1,45 +1,13 @@
-import { FareListItemPresentation } from './fare-list-item.presentation';
-import { Observable, of } from 'rxjs';
+import { delay, Observable, of, map } from 'rxjs';
+import { FareTransfer } from '../../providers/factory';
 
-type FareTransfert = {
-  rid: string;
-  created_at: string;
-  creator: string;
-  date: string;
-  distance: string;
-  duration: string;
-  in_has_entry: string;
-  in_has_fare: string;
-  isreturn: string;
-  locked: string;
-  meters: string;
-  out_has_invoice: string;
-  recurrent: string;
-  status: string;
-  subcontractor: string;
-  time: string;
-  timestamp: string;
-  updated_at: string;
-  weeklyrecurrence: string;
-};
+export const inMemoryFaresByDayAction$ = () => (): Observable<FareTransfer[]> =>
+  of(void 0).pipe(
+    delay(300),
+    map(() => faresInMemory)
+  );
 
-export const toFareListItemsPresentation = (fares: FareTransfert[]): FareListItemPresentation[] =>
-  fares.map((fare: FareTransfert) => ({
-    id: fare.rid,
-    date: fare.date,
-    distance: fare.distance,
-    duration: fare.duration,
-    status: fare.status as 'subcontracted' | 'finished',
-    time: fare.time
-  }));
-
-export class FareListPresenter {
-  public faresByDay$(): Observable<FareTransfert[]> {
-    return of(faresInMemory);
-  }
-}
-
-export const faresInMemory: FareTransfert[] = [
+export const faresInMemory: FareTransfer[] = [
   {
     rid: '#58:0',
     created_at: '1551717982000',
