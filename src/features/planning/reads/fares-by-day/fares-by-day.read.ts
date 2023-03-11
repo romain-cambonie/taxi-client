@@ -1,13 +1,45 @@
 import { delay, Observable, of, map } from 'rxjs';
-import { FareTransfer } from '../../providers/factory';
+import { FareByDayPresentation, FareStatus } from '../../presentation';
 
-export const inMemoryFaresByDayAction$ = () => (): Observable<FareTransfer[]> =>
+type FareTransfer = {
+  rid: string;
+  created_at: string;
+  creator: string;
+  date: string;
+  distance: string;
+  duration: string;
+  in_has_entry: string;
+  in_has_fare: string;
+  isreturn: string;
+  locked: string;
+  meters: string;
+  out_has_invoice: string;
+  recurrent: string;
+  status: string;
+  subcontractor: string;
+  time: string;
+  timestamp: string;
+  updated_at: string;
+  weeklyrecurrence: string;
+};
+
+const toFareByDayPresentation = (fares: FareTransfer[]): FareByDayPresentation[] =>
+  fares.map((fare: FareTransfer) => ({
+    id: fare.rid,
+    date: fare.date,
+    distance: fare.distance,
+    duration: fare.duration,
+    status: fare.status as FareStatus,
+    startTime: fare.time
+  }));
+
+export const faresByDayRead$ = () => (): Observable<FareByDayPresentation[]> =>
   of(void 0).pipe(
     delay(300),
-    map(() => faresInMemory)
+    map(() => toFareByDayPresentation(faresInMemory))
   );
 
-export const faresInMemory: FareTransfer[] = [
+const faresInMemory: FareTransfer[] = [
   {
     rid: '#58:0',
     created_at: '1551717982000',
