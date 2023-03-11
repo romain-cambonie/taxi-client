@@ -1,1 +1,1 @@
-export * from './forward-bearer-token.interceptor';
+export * from './bearer-token.interceptor';
