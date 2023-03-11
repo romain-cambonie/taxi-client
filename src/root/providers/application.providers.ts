@@ -1,12 +1,11 @@
 import {
   bearerTokenInterceptorProvider,
-  logoutFactoryProvider,
+  logoutActionProvider,
   RedirectRoutesKeys,
   redirectRoutesValueProvider,
-  refreshTokenFactoryProvider,
+  refreshTokenActionProvider,
   SESSION_PERSISTENCE,
-  sessionValueProvider,
-  BearerTokenInterceptor
+  sessionValueProvider
 } from '@features/authentication';
 import { HttpClient } from '@angular/common/http';
 import {
@@ -26,13 +25,12 @@ const redirectToRoutes: Map<RedirectRoutesKeys, string> = new Map<RedirectRoutes
 ]);
 
 const AUTHORIZED_ROUTES_PATTERN: RegExp = /\/api/;
-const getBearerToken = () => cognitoTokenSession().getAccess();
 
 export const APPLICATION_PROVIDERS = [
   cognitoValueProvider({ clientId: '6dnu0mkd0k5v4pdg9f36vnv0q6', region: 'us-east-1' }),
   sessionValueProvider(cognitoTokenSession()),
   redirectRoutesValueProvider(redirectToRoutes),
-  logoutFactoryProvider(cognitoLogoutAction, [SESSION_PERSISTENCE]),
-  refreshTokenFactoryProvider(cognitoRefreshTokenAction$, [HttpClient, COGNITO_PERSISTENCE, SESSION_PERSISTENCE]),
-  bearerTokenInterceptorProvider(() => new BearerTokenInterceptor(AUTHORIZED_ROUTES_PATTERN, getBearerToken))
+  logoutActionProvider(cognitoLogoutAction, [SESSION_PERSISTENCE]),
+  refreshTokenActionProvider(cognitoRefreshTokenAction$, [HttpClient, COGNITO_PERSISTENCE, SESSION_PERSISTENCE]),
+  bearerTokenInterceptorProvider(AUTHORIZED_ROUTES_PATTERN, cognitoTokenSession())
 ];
