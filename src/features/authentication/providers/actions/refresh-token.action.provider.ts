@@ -5,7 +5,7 @@ export type RefreshTokenAction<T> = () => Observable<T>;
 
 export const REFRESH_TOKEN_ACTION = 'authentication.refresh-token.action' as const;
 
-export const refreshTokenFactoryProvider = <TDependencies, TResult>(
+export const refreshTokenActionProvider = <TDependencies, TResult>(
   useFactory: (...providers: never[]) => RefreshTokenAction<TResult>,
   deps: TDependencies[] = []
 ): FactoryProvider => ({

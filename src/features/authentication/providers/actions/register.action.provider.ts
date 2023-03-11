@@ -5,7 +5,7 @@ export type RegisterAction<T> = (username: string, password: string) => Observab
 
 export const REGISTER_ACTION = 'authentication.register.action' as const;
 
-export const registerFactoryProvider = <TDependencies, TResult>(
+export const registerActionProvider = <TDependencies, TResult>(
   useFactory: (...providers: never[]) => RegisterAction<TResult>,
   deps: TDependencies[] = []
 ): FactoryProvider => ({

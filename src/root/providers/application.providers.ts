@@ -1,8 +1,9 @@
 import {
-  logoutFactoryProvider,
+  bearerTokenInterceptorProvider,
+  logoutActionProvider,
   RedirectRoutesKeys,
   redirectRoutesValueProvider,
-  refreshTokenFactoryProvider,
+  refreshTokenActionProvider,
   SESSION_PERSISTENCE,
   sessionValueProvider
 } from '@features/authentication';
@@ -23,10 +24,13 @@ const redirectToRoutes: Map<RedirectRoutesKeys, string> = new Map<RedirectRoutes
   ['session-expired', '/login']
 ]);
 
+const AUTHORIZED_ROUTES_PATTERN: RegExp = /\/api/;
+
 export const APPLICATION_PROVIDERS = [
   cognitoValueProvider({ clientId: '6dnu0mkd0k5v4pdg9f36vnv0q6', region: 'us-east-1' }),
   sessionValueProvider(cognitoTokenSession()),
   redirectRoutesValueProvider(redirectToRoutes),
-  logoutFactoryProvider(cognitoLogoutAction, [SESSION_PERSISTENCE]),
-  refreshTokenFactoryProvider(cognitoRefreshTokenAction$, [HttpClient, COGNITO_PERSISTENCE, SESSION_PERSISTENCE])
+  logoutActionProvider(cognitoLogoutAction, [SESSION_PERSISTENCE]),
+  refreshTokenActionProvider(cognitoRefreshTokenAction$, [HttpClient, COGNITO_PERSISTENCE, SESSION_PERSISTENCE]),
+  bearerTokenInterceptorProvider(AUTHORIZED_ROUTES_PATTERN, cognitoTokenSession())
 ];

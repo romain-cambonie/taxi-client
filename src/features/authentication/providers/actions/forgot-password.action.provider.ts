@@ -5,7 +5,7 @@ export type ForgotPasswordAction = (username: string) => Observable<void>;
 
 export const FORGOT_PASSWORD_ACTION = 'authentication.forgot-password.action' as const;
 
-export const forgotPasswordFactoryProvider = <TDependencies, TProviders>(
+export const forgotPasswordActionProvider = <TDependencies, TProviders>(
   useFactory: (...providers: TProviders[]) => ForgotPasswordAction,
   deps: TDependencies[] = []
 ): FactoryProvider => ({
