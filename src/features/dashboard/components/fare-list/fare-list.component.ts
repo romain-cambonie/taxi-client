@@ -12,7 +12,7 @@ export class FareListComponent {
 
   public constructor(public readonly route: ActivatedRoute) {}
 
-  public trackByFareId(_: number, fare: FareListItemPresentation) {
+  public trackByFareId(_: number, fare: FareListItemPresentation): string {
     return fare.id;
   }
 }

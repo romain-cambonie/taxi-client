@@ -3,13 +3,13 @@ import { Observable } from 'rxjs';
 
 export type FaresByDayAction<T> = () => Observable<T>;
 
-export const FARES_BY_DAY_ACTION = 'dashboard.fares-by-day.action' as const;
+export const FARES_BY_DAY_READ = 'dashboard.fares-by-day.read' as const;
 
-export const faresByDayFactoryProvider = <TDependencies, TResult>(
+export const faresByDayReadProvider = <TDependencies, TResult>(
   useFactory: (...providers: never[]) => FaresByDayAction<TResult>,
   deps: TDependencies[] = []
 ): FactoryProvider => ({
-  provide: FARES_BY_DAY_ACTION,
+  provide: FARES_BY_DAY_READ,
   useFactory,
   deps
 });

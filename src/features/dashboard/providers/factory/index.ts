@@ -1,1 +1,1 @@
-export * from './fares-by-day.factory.provider';
+export * from './fares-by-day-read.provider';
