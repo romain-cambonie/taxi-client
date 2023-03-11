@@ -4,7 +4,7 @@ export type LogoutAction = () => void;
 
 export const LOGOUT_ACTION = 'authentication.logout.action' as const;
 
-export const logoutFactoryProvider = <TDependencies>(
+export const logoutActionProvider = <TDependencies>(
   useFactory: (...providers: never[]) => LogoutAction,
   deps: TDependencies[] = []
 ): FactoryProvider => ({
