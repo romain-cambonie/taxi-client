@@ -33,10 +33,7 @@ export const cognitoLoginAction$ =
       .post<LoginResponse>(
         loginUrl(cognito),
         {
-          AuthParameters: {
-            USERNAME: username,
-            PASSWORD: password
-          },
+          AuthParameters: { USERNAME: username, PASSWORD: password },
           AuthFlow: 'USER_PASSWORD_AUTH',
           ClientId: cognito.clientId
         },

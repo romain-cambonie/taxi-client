@@ -27,11 +27,7 @@ export const cognitoActivateAction$ =
     http
       .post(
         activateUrl(cognito),
-        {
-          Username: username,
-          ConfirmationCode: code,
-          ClientId: cognito.clientId
-        },
+        { Username: username, ConfirmationCode: code, ClientId: cognito.clientId },
         { headers: ACTIVATE_HEADERS }
       )
       .pipe(catchError(handleActivateError$(code)));

@@ -27,11 +27,7 @@ export const cognitoRefreshTokenAction$ =
     http
       .post<RefreshTokenResponse>(
         refreshTokenUrl(cognito),
-        {
-          AuthParameters: { REFRESH_TOKEN: session.getRefresh() },
-          AuthFlow: 'REFRESH_TOKEN_AUTH',
-          ClientId: cognito.clientId
-        },
+        { AuthParameters: { REFRESH_TOKEN: session.getRefresh() }, AuthFlow: 'REFRESH_TOKEN_AUTH', ClientId: cognito.clientId },
         { headers: RefreshToken_HEADERS }
       )
       .pipe(
