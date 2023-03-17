@@ -19,6 +19,7 @@ import {
 const redirectToRoutes: Map<RedirectRoutesKeys, string> = new Map<RedirectRoutesKeys, string>([
   ['activate', '/login'],
   ['register', '/activate'],
+  ['not-activated', '/activate'],
   ['login', '/'],
   ['logout', '/'],
   ['session-expired', '/login']

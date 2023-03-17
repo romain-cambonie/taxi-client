@@ -1,5 +1,5 @@
-import { INVALID_CODE_ERROR_NAME, InvalidCodeError } from '../../errors';
-import { formatActivateError, FormattedActivateError } from './activate.presenter';
+import { INVALID_CODE_ERROR_NAME, InvalidCodeError, NoUsernameError, UnknownAccountError } from '../../errors';
+import { activationCodeErrorMessageFrom, formatActivateError, FormattedActivateError } from './activate.presenter';
 
 describe('activate presenter', (): void => {
   it('should format invalid code error', (): void => {
@@ -25,5 +25,29 @@ describe('activate presenter', (): void => {
         unknown: true
       }
     });
+  });
+
+  it('should format resend activation code unknown account error', (): void => {
+    const error: Error = new UnknownAccountError('test@taxi-driver.com');
+
+    const errorMessage: string = activationCodeErrorMessageFrom(error);
+
+    expect(errorMessage).toStrictEqual("Il n'existe aucun compte associé à l'identifiant test@taxi-driver.com");
+  });
+
+  it('should format resend activation code invalid parameter error', (): void => {
+    const error: Error = new NoUsernameError();
+
+    const errorMessage: string = activationCodeErrorMessageFrom(error);
+
+    expect(errorMessage).toStrictEqual("Saisissez l'email ou le numéro téléphone portable associé à votre compte");
+  });
+
+  it('should format resend activation code unknown error', (): void => {
+    const error: Error = new Error();
+
+    const errorMessage: string = activationCodeErrorMessageFrom(error);
+
+    expect(errorMessage).toStrictEqual('Une erreur inconnue est survenue');
   });
 });

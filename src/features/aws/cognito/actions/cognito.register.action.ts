@@ -27,11 +27,7 @@ export const cognitoRegisterAction$ =
     http
       .post(
         registerUrl(cognito),
-        {
-          Username: username,
-          Password: password,
-          ClientId: cognito.clientId
-        },
+        { Username: username, Password: password, ClientId: cognito.clientId },
         { headers: REGISTER_HEADERS }
       )
       .pipe(catchError(handleRegisterError$(username)));
