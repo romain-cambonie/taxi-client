@@ -32,6 +32,7 @@
     Vous avez déjà un compte&nbsp;?
     <a
       class="text-decoration-none ms-1"
+      (click)="registerForm.reset()"
       routerLink="/login"
       [queryParams]="username.value ? { username: username.value } : null">
       Connectez-vous

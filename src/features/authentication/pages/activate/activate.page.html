@@ -27,7 +27,7 @@
       [touched]="code.touched"
       [errors]="code.errors"></app-code-field>
     <div class="text-danger" *ngIf="activateForm.errors?.['unknown']">
-      Une erreur inconnue est survenue pendant la connexion à votre compte.
+      Une erreur inconnue est survenue pendant l'activation de votre compte.
     </div>
     <app-submit [isLoading]="(isActivating$ | async) ?? false">
       Activer mon compte

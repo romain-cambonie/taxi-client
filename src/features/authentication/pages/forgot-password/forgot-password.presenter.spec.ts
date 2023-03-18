@@ -1,4 +1,4 @@
-import { UNKNOWN_ACCOUNT_ERROR_NAME, UnknownAccountError } from '../../errors';
+import { LIMIT_EXCEEDED_ERROR_NAME, LimitExceededError, UNKNOWN_ACCOUNT_ERROR_NAME, UnknownAccountError } from '../../errors';
 import { formatForgotPasswordError, FormattedForgotPasswordError } from './forgot-password.presenter';
 
 describe('forgot password presenter', (): void => {
@@ -11,6 +11,18 @@ describe('forgot password presenter', (): void => {
       field: 'username',
       errors: {
         [UNKNOWN_ACCOUNT_ERROR_NAME]: error
+      }
+    });
+  });
+
+  it('should format too many attempts error', (): void => {
+    const error: Error = new LimitExceededError();
+
+    const formattedError: FormattedForgotPasswordError = formatForgotPasswordError(error);
+
+    expect(formattedError).toStrictEqual({
+      errors: {
+        [LIMIT_EXCEEDED_ERROR_NAME]: error
       }
     });
   });

@@ -10,5 +10,5 @@ export const CODE_ERROR_MESSAGES: Map<string, (errors: CodeErrors) => string> = 
     INVALID_CODE_ERROR_NAME,
     (codeErrors: CodeErrors): string => `Le code ${codeErrors?.invalidCodeError?.code} n'est pas valide`
   ],
-  ['required', (): string => "Saisissez le code d'activation de votre compte"]
+  ['required', (): string => "Saisissez le code d'activation"]
 ]);
