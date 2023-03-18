@@ -17,6 +17,7 @@
     <div class="text-end mt-1">
       <a
         class="text-decoration-none"
+        (click)="loginForm.reset()"
         routerLink="/forgot-password"
         [queryParams]="username.value ? { username: username.value } : null">
         Mot de passe oublié ?
@@ -37,6 +38,7 @@
     Pas encore de compte&nbsp;?
     <a
       class="text-decoration-none ms-1"
+      (click)="loginForm.reset()"
       routerLink="/register"
       [queryParams]="username.value ? { username: username.value } : null">
       Créez le dès à présent&nbsp;!
