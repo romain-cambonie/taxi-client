@@ -1,15 +1,12 @@
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { catchError, map, mergeWith, Observable, Subject, switchMap, tap } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { catchError, from, map, mergeWith, Observable, Subject, switchMap, tap } from 'rxjs';
+import { LIMIT_EXCEEDED_EXIST_ERROR_NAME } from '../../errors';
 import { START_LOADING, STOP_LOADING, whileLoading } from '../../presentation';
-import { FORGOT_PASSWORD_ACTION, ForgotPasswordAction } from '../../providers';
-import { FORGOT_PASSWORD_FORM, setForgotPasswordErrorToForm } from './forgot-password.form';
+import { FORGOT_PASSWORD_ACTION, ForgotPasswordAction, REDIRECT_ROUTES_PERSISTENCE, RedirectRoutesKeys } from '../../providers';
+import { FORGOT_PASSWORD_FORM, ForgotPasswordForm, setForgotPasswordErrorToForm } from './forgot-password.form';
 import { formatForgotPasswordError } from './forgot-password.presenter';
-
-type ForgotPasswordForm = {
-  username: string;
-};
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -17,6 +14,8 @@ type ForgotPasswordForm = {
 })
 export class ForgotPasswordPage {
   private readonly _isLoading$: Subject<boolean> = new Subject<boolean>();
+
+  public limitExceededErrorName: string = LIMIT_EXCEEDED_EXIST_ERROR_NAME;
 
   public forgotPasswordForm = FORGOT_PASSWORD_FORM;
 
@@ -33,6 +32,9 @@ export class ForgotPasswordPage {
   private readonly _forgotPassword$: Observable<boolean> = this._isLoading$.pipe(
     switchMap(whileLoading(() => this._forgotPasswordAction$(this.username.value))),
     catchError(this.handleForgotPasswordActionError),
+    tap(() =>
+      from(this._router.navigate([this._toRoutes.get('forgot-password')], { queryParams: { username: this.username.value } }))
+    ),
     tap(() => FORGOT_PASSWORD_FORM.reset()),
     map(() => STOP_LOADING)
   );
@@ -41,7 +43,9 @@ export class ForgotPasswordPage {
 
   public constructor(
     @Inject(FORGOT_PASSWORD_ACTION) private readonly _forgotPasswordAction$: ForgotPasswordAction,
-    private readonly _route: ActivatedRoute
+    @Inject(REDIRECT_ROUTES_PERSISTENCE) private readonly _toRoutes: Map<RedirectRoutesKeys, string>,
+    private readonly _route: ActivatedRoute,
+    private readonly _router: Router
   ) {
     this._defaultUsername && this.username.setValue(this._defaultUsername);
   }
