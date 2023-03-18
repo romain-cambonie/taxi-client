@@ -18,6 +18,8 @@ const handleResetPasswordError$ =
         return throwError(() => new UnknownAccountError(username));
       case 'LimitExceededException':
         return throwError(() => new LimitExceededError());
+      case 'CodeMismatchException':
+        return throwError(() => new InvalidCodeError(code));
       case 'ExpiredCodeException':
         return throwError(() => new InvalidCodeError(code));
       default:
