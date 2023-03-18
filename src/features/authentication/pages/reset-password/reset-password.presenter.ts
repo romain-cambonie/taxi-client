@@ -1,4 +1,4 @@
-import { INVALID_CODE_ERROR_NAME, LIMIT_EXCEEDED_EXIST_ERROR_NAME, UNKNOWN_ACCOUNT_ERROR_NAME } from '../../errors';
+import { INVALID_CODE_ERROR_NAME, LIMIT_EXCEEDED_ERROR_NAME, UNKNOWN_ACCOUNT_ERROR_NAME } from '../../errors';
 
 export type FormattedResetPasswordError = { field?: string; errors: Record<string, unknown> };
 
@@ -22,10 +22,10 @@ const resetPasswordFormatMap: Map<string, (error: Error) => FormattedResetPasswo
     })
   ],
   [
-    LIMIT_EXCEEDED_EXIST_ERROR_NAME,
+    LIMIT_EXCEEDED_ERROR_NAME,
     (error: Error) => ({
       errors: {
-        [LIMIT_EXCEEDED_EXIST_ERROR_NAME]: error
+        [LIMIT_EXCEEDED_ERROR_NAME]: error
       }
     })
   ]

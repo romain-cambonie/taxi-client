@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { catchError, from, map, mergeWith, Observable, Subject, switchMap, tap } from 'rxjs';
-import { LIMIT_EXCEEDED_EXIST_ERROR_NAME } from '../../errors';
+import { LIMIT_EXCEEDED_ERROR_NAME } from '../../errors';
 import { START_LOADING, STOP_LOADING, whileLoading } from '../../presentation';
 import { FORGOT_PASSWORD_ACTION, ForgotPasswordAction, REDIRECT_ROUTES_PERSISTENCE, RedirectRoutesKeys } from '../../providers';
 import { FORGOT_PASSWORD_FORM, ForgotPasswordForm, setForgotPasswordErrorToForm } from './forgot-password.form';
@@ -15,7 +15,7 @@ import { formatForgotPasswordError } from './forgot-password.presenter';
 export class ForgotPasswordPage {
   private readonly _isLoading$: Subject<boolean> = new Subject<boolean>();
 
-  public limitExceededErrorName: string = LIMIT_EXCEEDED_EXIST_ERROR_NAME;
+  public limitExceededErrorName: string = LIMIT_EXCEEDED_ERROR_NAME;
 
   public forgotPasswordForm = FORGOT_PASSWORD_FORM;
 

@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { catchError, from, map, mergeWith, Observable, Subject, switchMap, tap } from 'rxjs';
-import { LIMIT_EXCEEDED_EXIST_ERROR_NAME } from '../../errors';
+import { LIMIT_EXCEEDED_ERROR_NAME } from '../../errors';
 import { START_LOADING, STOP_LOADING, whileLoading } from '../../presentation';
 import { RESET_PASSWORD_ACTION, ResetPasswordAction, REDIRECT_ROUTES_PERSISTENCE, RedirectRoutesKeys } from '../../providers';
 import { RESET_PASSWORD_FORM, ResetPasswordForm, setResetPasswordErrorToForm } from './reset-password.form';
@@ -17,7 +17,7 @@ export class ResetPasswordPage {
 
   public resetPasswordForm = RESET_PASSWORD_FORM;
 
-  public limitExceededErrorName: string = LIMIT_EXCEEDED_EXIST_ERROR_NAME;
+  public limitExceededErrorName: string = LIMIT_EXCEEDED_ERROR_NAME;
 
   public username: FormControl<ResetPasswordForm['username']> = this.resetPasswordForm.controls.username;
   public password: FormControl<ResetPasswordForm['password']> = this.resetPasswordForm.controls.password;

@@ -1,7 +1,7 @@
 import {
   INVALID_CODE_ERROR_NAME,
   InvalidCodeError,
-  LIMIT_EXCEEDED_EXIST_ERROR_NAME,
+  LIMIT_EXCEEDED_ERROR_NAME,
   LimitExceededError,
   UNKNOWN_ACCOUNT_ERROR_NAME,
   UnknownAccountError
@@ -42,7 +42,7 @@ describe('reset password presenter', (): void => {
 
     expect(formattedError).toStrictEqual({
       errors: {
-        [LIMIT_EXCEEDED_EXIST_ERROR_NAME]: error
+        [LIMIT_EXCEEDED_ERROR_NAME]: error
       }
     });
   });

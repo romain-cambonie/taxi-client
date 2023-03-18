@@ -1,4 +1,4 @@
-import { LIMIT_EXCEEDED_EXIST_ERROR_NAME, UNKNOWN_ACCOUNT_ERROR_NAME } from '../../errors';
+import { LIMIT_EXCEEDED_ERROR_NAME, UNKNOWN_ACCOUNT_ERROR_NAME } from '../../errors';
 
 export type FormattedForgotPasswordError = { field?: string; errors: Record<string, unknown> };
 
@@ -13,10 +13,10 @@ const forgotPasswordFormatMap: Map<string, (error: Error) => FormattedForgotPass
     })
   ],
   [
-    LIMIT_EXCEEDED_EXIST_ERROR_NAME,
+    LIMIT_EXCEEDED_ERROR_NAME,
     (error: Error) => ({
       errors: {
-        [LIMIT_EXCEEDED_EXIST_ERROR_NAME]: error
+        [LIMIT_EXCEEDED_ERROR_NAME]: error
       }
     })
   ]

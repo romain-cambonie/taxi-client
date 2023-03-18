@@ -1,9 +1,4 @@
-import {
-  LIMIT_EXCEEDED_EXIST_ERROR_NAME,
-  LimitExceededError,
-  UNKNOWN_ACCOUNT_ERROR_NAME,
-  UnknownAccountError
-} from '../../errors';
+import { LIMIT_EXCEEDED_ERROR_NAME, LimitExceededError, UNKNOWN_ACCOUNT_ERROR_NAME, UnknownAccountError } from '../../errors';
 import { formatForgotPasswordError, FormattedForgotPasswordError } from './forgot-password.presenter';
 
 describe('forgot password presenter', (): void => {
@@ -27,7 +22,7 @@ describe('forgot password presenter', (): void => {
 
     expect(formattedError).toStrictEqual({
       errors: {
-        [LIMIT_EXCEEDED_EXIST_ERROR_NAME]: error
+        [LIMIT_EXCEEDED_ERROR_NAME]: error
       }
     });
   });
