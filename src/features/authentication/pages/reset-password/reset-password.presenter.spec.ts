@@ -35,7 +35,7 @@ describe('reset password presenter', (): void => {
     });
   });
 
-  it('should format too many attempt errors error', (): void => {
+  it('should format too many attempts error', (): void => {
     const error: Error = new LimitExceededError();
 
     const formattedError: FormattedResetPasswordError = formatResetPasswordError(error);
