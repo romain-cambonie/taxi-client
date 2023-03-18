@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthenticationLayout } from '../layouts';
-import { ActivatePage, ForgotPasswordPage, LoginPage, RegisterPage } from '../pages';
+import { ActivatePage, ForgotPasswordPage, LoginPage, RegisterPage, ResetPasswordPage } from '../pages';
 
 const ROUTES: Routes = [
   {
@@ -21,8 +21,14 @@ const ROUTES: Routes = [
       {
         component: ForgotPasswordPage,
         path: 'forgot-password',
-        title: 'Taxi Gestion - Réinitialisation du mot de passe',
+        title: 'Taxi Gestion - Mot de passe oublié',
         data: { animation: 'ForgotPasswordPage' }
+      },
+      {
+        component: ResetPasswordPage,
+        path: 'reset-password',
+        title: 'Taxi Gestion - Réinitialisation du mot de passe',
+        data: { animation: 'ResetPasswordPage' }
       },
       {
         component: ActivatePage,

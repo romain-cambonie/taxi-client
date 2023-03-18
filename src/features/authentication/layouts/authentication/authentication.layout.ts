@@ -12,7 +12,9 @@ import { slideInAnimation } from '../../animations';
       ['RegisterPage', 'LoginPage'],
       ['RegisterPage', 'ActivatePage'],
       ['ActivatePage', 'LoginPage'],
-      ['ForgotPasswordPage', 'LoginPage']
+      ['ForgotPasswordPage', 'LoginPage'],
+      ['ForgotPasswordPage', 'ResetPasswordPage'],
+      ['ResetPasswordPage', 'LoginPage']
     ])
   ],
   templateUrl: './authentication.layout.html'

@@ -22,7 +22,9 @@ const redirectToRoutes: Map<RedirectRoutesKeys, string> = new Map<RedirectRoutes
   ['not-activated', '/activate'],
   ['login', '/'],
   ['logout', '/'],
-  ['session-expired', '/login']
+  ['session-expired', '/login'],
+  ['forgot-password', '/reset-password'],
+  ['reset-password', '/login']
 ]);
 
 const AUTHORIZED_ROUTES_PATTERN: RegExp = /\/api/;
