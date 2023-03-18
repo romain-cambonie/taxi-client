@@ -7,14 +7,14 @@ import { slideInAnimation } from '../../animations';
   animations: [
     slideInAnimation([
       ['LoginPage', 'ForgotPasswordPage'],
+      ['LoginPage', 'ResetPasswordPage'],
       ['LoginPage', 'RegisterPage'],
       ['LoginPage', 'ActivatePage'],
       ['RegisterPage', 'LoginPage'],
       ['RegisterPage', 'ActivatePage'],
       ['ActivatePage', 'LoginPage'],
       ['ForgotPasswordPage', 'LoginPage'],
-      ['ForgotPasswordPage', 'ResetPasswordPage'],
-      ['ResetPasswordPage', 'LoginPage']
+      ['ForgotPasswordPage', 'ResetPasswordPage']
     ])
   ],
   templateUrl: './authentication.layout.html'
