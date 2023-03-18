@@ -1,6 +1,14 @@
 import { ValueProvider } from '@angular/core';
 
-export type RedirectRoutesKeys = 'register' | 'login' | 'logout' | 'activate' | 'session-expired' | 'not-activated';
+export type RedirectRoutesKeys =
+  | 'register'
+  | 'login'
+  | 'logout'
+  | 'activate'
+  | 'session-expired'
+  | 'not-activated'
+  | 'forgot-password'
+  | 'reset-password';
 
 export type RedirectRoutes = Map<RedirectRoutesKeys, string>;
 
