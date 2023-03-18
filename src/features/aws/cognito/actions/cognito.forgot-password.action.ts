@@ -1,27 +1,35 @@
-// import { delay, Observable, of, tap, throwError } from 'rxjs';
-// import { UnknownAccountError } from '../../errors';
-// import { Account } from '../../providers';
-//
-// const findAccountToReset = (accounts: Account[], username: string): Account | undefined =>
-//   accounts.find((account: Account) => account.username === username);
-//
-// const setPasswordResetCode = (accountToReset: Account | undefined, resetPasswordCode: string): string | undefined =>
-//   accountToReset && (accountToReset.resetPasswordCode = resetPasswordCode);
-//
-// const unknownAccount = (accounts: Account[], username: string): boolean =>
-//   accounts.find((account: Account) => account.username === username) == null;
-//
-// const generateResetPasswordCode = (): string => Math.random().toString(36).slice(-8);
-//
-// export const cognitoForgotPasswordAction =
-//   (accounts: Account[]) =>
-//   (username: string, resetPasswordCode: string = generateResetPasswordCode()): Observable<void> =>
-//     unknownAccount(accounts, username)
-//       ? throwError(() => new UnknownAccountError(username))
-//       : of(void 0).pipe(
-//           delay(300),
-//           tap(() => {
-//             setPasswordResetCode(findAccountToReset(accounts, username), resetPasswordCode);
-//             console.info(resetPasswordCode);
-//           })
-//         );
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { catchError, Observable, throwError } from 'rxjs';
+import { LimitExceededError, UnknownAccountError } from '@features/authentication';
+import { Cognito } from '../providers';
+
+const FORGOT_PASSWORD_HEADERS: Record<string, string> = {
+  'X-Amz-Target': 'AWSCognitoIdentityProviderService.ForgotPassword',
+  'Content-Type': 'application/x-amz-json-1.1'
+};
+
+const forgotPasswordUrl = (cognito: Cognito): string => `https://cognito-idp.${cognito.region}.amazonaws.com`;
+
+const handleForgotPasswordError$ =
+  (username: string) =>
+  (errorResponse: HttpErrorResponse, caught: Observable<void>): Observable<void> => {
+    switch (errorResponse.error.__type) {
+      case 'UserNotFoundException':
+        return throwError(() => new UnknownAccountError(username));
+      case 'LimitExceededException':
+        return throwError(() => new LimitExceededError());
+      default:
+        return throwError(() => caught);
+    }
+  };
+
+export const cognitoForgotPasswordAction$ =
+  (http: HttpClient, cognito: Cognito) =>
+  (username: string): Observable<void> =>
+    http
+      .post<void>(
+        forgotPasswordUrl(cognito),
+        { ClientId: cognito.clientId, Username: username },
+        { headers: FORGOT_PASSWORD_HEADERS }
+      )
+      .pipe(catchError(handleForgotPasswordError$(username)));
