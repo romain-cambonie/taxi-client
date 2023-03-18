@@ -16,7 +16,7 @@ describe('code error messages', (): void => {
 
     const errorMessage: string[] = fieldErrorMessagesPresentation(errors, CODE_ERROR_MESSAGES);
 
-    expect(errorMessage).toStrictEqual(["Saisissez le code d'activation de votre compte"]);
+    expect(errorMessage).toStrictEqual(["Saisissez le code d'activation"]);
   });
 
   it('should get invalid code error message', (): void => {
