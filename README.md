@@ -1,6 +1,8 @@
-# Taxi Gestion
+# Taxi Gestion Client
 
 Outil de gestion à destination des flottes de taxi, particulièrement des vsl (véhicules sanitaires légers).
+
+> Ce dépot est responsable de la partie applicative client.
 
 ## Table des matières
 
