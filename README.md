@@ -1,27 +1,66 @@
-# Taxi
+# Taxi Gestion
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.3.
+Outil de gestion à destination des flottes de taxi, particulièrement des vsl (véhicules sanitaires légers).
 
-## Development server
+## Table des matières
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- 🪧 [À propos](#à-propos)
+- 📦 [Prérequis](#prérequis)
+- 🚀 [Installation](#installation)
+- 🛠️ [Utilisation](#utilisation)
+- 🤝 [Contribution](#contribution)
 
-## Code scaffolding
+## Prérequis
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- [Git](https://git-scm.com/) : Système de contrôle de versions distribué d'un ensemble de fichiers
+- [Node](https://nodejs.org/) : Environnement d'exécution pour Javascript
+- [Yarn Classic](https://classic.yarnpkg.com) : Gestionnaire de paquets pour les produits développés dans des environnements Node
 
-## Build
+> Node peut être installés via [nvm](https://github.com/nvm-sh/nvm) qui permet d'obtenir et d'utiliser rapidement différentes versions de Node via la ligne de commande.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Installation
 
-## Running unit tests
+### Mise en place des sources
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Cloner le projet
 
-## Running end-to-end tests
+### Installer Husky
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+[Husky](https://typicode.github.io/husky) est un outil de gestion des hooks git pour effectuer des tâches automatiques
 
-## Further help
+```bash
+npx husky install
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Rendre exécutable les fichiers qui contiennent les hooks :
+
+```bash
+chmod a+x .husky/commit-msg
+chmod a+x .husky/pre-commit
+```
+
+## Utilisation
+
+Ces commandes servent dans un contexte de développement de l'application et doivent être exécutées depuis la racine de l'espace de travail.
+
+### Mise en place des prérequis
+
+```bash
+yarn install
+```
+
+### Lancement
+
+```bash
+yarn start
+```
+
+Puis naviguer vers `http://localhost:4200/`.
+
+### Développement
+
+Les commandes communes de développement se trouvent dans le champ scripts du package.json
+
+### Contribution
+
+Le projet n'est actuellement pas ouvert à la contribution
