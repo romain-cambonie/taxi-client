@@ -1,5 +1,7 @@
 # Taxi Gestion Client
 
+> Ce dépot est obsolète. Le projet Taxi Gestion est hébergé sur son [organisation dédiée](https://github.com/taxi-gestion)
+
 Outil de gestion à destination des flottes de taxi, particulièrement des vsl (véhicules sanitaires légers).
 
 > Ce dépot est responsable de la partie applicative client.
